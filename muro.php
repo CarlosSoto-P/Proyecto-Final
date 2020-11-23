@@ -33,38 +33,58 @@
 
 
 
-            <div class="container-fluid gedf-wrapper">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="h5">
-                                    <a href="perfil.php">Usuario</a>
+        <div class="container-fluid gedf-wrapper">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
 
-                                </div>
-                                <div class="h7 text-muted">Nombre Completo : Miracles Lee Cross</div>
-                                <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby,
-                                    Java,
-                                    Node.js,
-                                    etc.
-                                </div>
+                        <div class="card-body">
+                            <div class="h5">
+                                <a href="perfil.php">Usuario</a>
+
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="h6 text-muted">Followers</div>
-                                    <div class="h5">5.2342</div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="h6 text-muted">Following</div>
-                                    <div class="h5">6758</div>
-                                </li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
+                            <div class="h7 text-muted">Nombre Completo : Miracles Lee Cross</div>
+                            <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby,
+                                Java,
+                                Node.js,
+                                etc.
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 gedf-main">
 
-                        <!--- \\\\\\\Post
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="h5">
+                                <h5 class="text-primary">Grupos</h5>
+
+
+
+                            </div>
+                            <div clas="h5">
+                            <?php
+                            for ($i=0; $i <15; $i++):
+                            
+                            ?>
+                                <ul>
+                                    <li>
+                                        <a href="#" class="text-dark">Nombre</a>
+                                    </li>
+                                </ul>
+                                <?php endfor ?>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6 gedf-main">
+
+                    <!--- \\\\\\\Post
                     <div class="card gedf-card">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -101,93 +121,90 @@
 
                     </div>
                     -->
-                        <hr>
-                        <div class="text-center bg-info text-white h1">
-                            Publicaciones de tus Grupos
-                        </div>
-                        <hr>
+                    <hr>
+                    <div class="text-center bg-info text-white h1">
+                        Publicaciones de tus Grupos
+                    </div>
+                    <hr>
 
-                        <!--- \\\\\\\Post-->
+                    <!--- \\\\\\\Post-->
 
-                        <?php
+                    <?php
 
-                            for ($i=0; $i <200; $i++):
+                            for ($i=0; $i <10; $i++):
                             ?>
 
-                        <div class="card gedf-card">
-                            <div class="card-header">
+                    <div class="card gedf-card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
-                                                alt="">
-                                        </div>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0">
-                                                
-                                                <a href="perfil.php">@LeeCross</a>
-                                            </div>
-                                            <div class="h7 text-muted">Miracles Lee Cross</div>
-                                            <a class="text-muted" href="#">>En Grupo</a>
-                                        </div>
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                     </div>
-                                    <div>
-                                        <div class="dropdown">
-                                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                                <div class="h6 dropdown-header">Configuration</div>
-                                                <a class="dropdown-item" href="#">Save</a>
-                                                <a class="dropdown-item" href="#">Hide</a>
-                                                <a class="dropdown-item" href="#">Report</a>
-                                            </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0">
+
+                                            <a href="perfil.php">@LeeCross</a>
+                                        </div>
+                                        <div class="h7 text-muted">Miracles Lee Cross</div>
+                                        <a class="text-muted" href="#">>En Grupo</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                            <div class="h6 dropdown-header">Configuration</div>
+                                            <a class="dropdown-item" href="#">Save</a>
+                                            <a class="dropdown-item" href="#">Hide</a>
+                                            <a class="dropdown-item" href="#">Report</a>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="card-body">
-                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
 
-                                <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
-
-                                <p class="card-text">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-                                    eos
-                                    ipsa praesentium esse magnam nemo dolor
-                                    sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-
-                            </div>
                         </div>
-                        <br>
-                        <hr>
-                        <br>
-                        <?php endfor; ?>
-                        <!-- Post /////-->
-                    </div>
-                    <!-- barra lateral -->
-                    <?php include("includes/barraLateral.php"); ?>
+                        <div class="card-body">
+                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
 
+                            <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
+                                eos
+                                ipsa praesentium esse magnam nemo dolor
+                                sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <?php endfor; ?>
+                    <!-- Post /////-->
                 </div>
+                <!-- barra lateral -->
+                <?php include("includes/barraLateral.php"); ?>
+
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-                crossorigin="anonymous">
-            </script>
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous">
-            </script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous">
-            </script>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
 </body>
+
 </html>
