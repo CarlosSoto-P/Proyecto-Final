@@ -36,34 +36,34 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                         <form id="registerform" class="form-horizontal" role="form">
 
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="nombre" type="text" class="form-control" name="username" value=""
                                     placeholder="Nombre completo.">
                             </div>
 
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="apellidos" type="text" class="form-control" name="username" value=""
                                     placeholder="Apellidos.">
                             </div>
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="telefono" type="text" class="form-control" name="username" value=""
                                     placeholder="Telefono.">
                             </div>
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="correo" type="text" class="form-control" name="username" value=""
                                     placeholder="Correo.">
                             </div>
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="contraseña" type="password" class="form-control" name="username" value=""
                                     placeholder="contraseña">
                             </div>
 
-                            <div style="margin-bottom: 25px" class="input-group">
+                            <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="contraseñaR" type="password" class="form-control" name="username" value=""
                                     placeholder="Repita su contraseña">
