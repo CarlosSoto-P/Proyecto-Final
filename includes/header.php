@@ -19,10 +19,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Amigos</a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="#">Chat</a>
                 </li>
 
