@@ -29,6 +29,8 @@
     
     <! -- cabecera -->
         <?php include("includes/header.php"); ?>
+    <! --barra lateral-->
+
 
 
 
