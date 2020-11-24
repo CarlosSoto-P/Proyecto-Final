@@ -1,3 +1,42 @@
+<?php
+  // Inicializamos la sesion o la retomamos
+  if(!isset($_SESSION)) {
+    session_start();
+  }
+
+  // Incluimos la conexión a la base de datos
+  include("connections/conn_localhost.php");
+  include("includes/common_functions.php");
+
+
+    // Armamos el query para verificar el email y el password en la base de datos
+    $queryLogin = sprintf("SELECT idUsuario, nombres, apellidos,telefono,correo,rol,descripcion FROM usuario WHERE correo = '%s' AND contraseña = '%s'",
+        mysqli_real_escape_string($connLocalhost, 'Carlos.soto.2000@hotmail.com'),
+        mysqli_real_escape_string($connLocalhost, '6221098703')
+    );
+
+    // Ejecutamos el query
+    $resQueryLogin = mysqli_query($connLocalhost, $queryLogin) or trigger_error("El query de login de usuario falló");
+
+      $userData = mysqli_fetch_assoc($resQueryLogin);
+
+      // Definimos variables de sesion en $_SESSION
+      $_SESSION['id'] = $userData['idUsuario'];
+      $_SESSION['nombres'] = $userData['nombres']." ".$userData['apellidos'];
+      $_SESSION['correo'] = $userData['correo'];
+      $_SESSION['rol'] = $userData['rol'];
+      $_SESSION['Descripcion'] = $userData['descripcion'];
+
+      // Redireccionamos al usuario al panel de control
+      #header('Location: cpanel.php');
+
+    
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,14 +79,19 @@
 
                         <div class="card-body">
                             <div class="h5">
-                                <a href="perfil.php">Usuario</a>
+                                <a href="miPerfil.php">
+                                <?php 
+                                echo($_SESSION['nombres'])
+                                ?> 
+                                </a>
 
                             </div>
-                            <div class="h7 text-muted">Nombre Completo : Miracles Lee Cross</div>
-                            <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby,
-                                Java,
-                                Node.js,
-                                etc.
+                            <div class="h7">
+
+
+                            <?php 
+                            echo($userData['descripcion'])
+                            ?>
                             </div>
                         </div>
 
