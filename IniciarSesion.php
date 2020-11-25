@@ -1,10 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>My San Carlos Vacation, San Carlos Property Rentals - Login</title>
+
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
+
+<link href="css_main.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+<!--
+function MM_jumpMenuGo(objId,targ,restore){ //v9.0
+  var selObj = null;  with (document) { 
+  if (getElementById) selObj = getElementById(objId);
+  if (selObj) eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0; }
+}
+//-->
+</script>
+</head>
+
+<body>
+<div id="main">
+
+
+<!-- HEADER END -->
+
+
+
+<div id="content" class="txt_content">
+ 
+
+  <?php
+    if(isset($error)) printMsg($error, "error");
+    if(isset($_GET["auth"])) printMsg("We're sorry... You need to login first!", "announce");
+    if(isset($_GET["loggedOff"])) printMsg("Bye bye :)", "exito");
+  ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="prueba.css">
+    <link rel="stylesheet" href="css/estiloz.css">
   </head>
   <body>
 
