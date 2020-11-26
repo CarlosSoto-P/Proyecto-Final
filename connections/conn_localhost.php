@@ -3,9 +3,12 @@
 $servidor = "localhost"; // Puede ser una ubicación remota
 $baseDatos = "redsocial";
 
-
+//$usuarioBd = "root";
 $usuarioBd = "root";
-$passwordBd = "";
+$passwordBd = "iswBD2101";
+//$passwordBd = "";
+//$passwordBd = "";
+//$passwordBd = "";
 
 // Creamos la conexión
 $connLocalhost = mysqli_connect($servidor, $usuarioBd, $passwordBd) or trigger_error(mysqli_error(), E_USER_ERROR);
