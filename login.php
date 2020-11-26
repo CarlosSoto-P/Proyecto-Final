@@ -45,8 +45,13 @@ if(isset($_POST['login_sent'])) {
 	$_SESSION['rol'] = $userData['rol'];
 	$_SESSION['descripcion'] = $userData['descripcion'];
 
+    if($_SESSION['rol'] = Alumno){
 
 	header('Location: index.php');
+}else{
+	header('Location: indexAsesor.php');
+
+}
 
   }
   else {
@@ -120,9 +125,9 @@ if(isset($_POST['login_sent'])) {
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn" name="login_sent">
                             Iniciar Sesion
-						</button>
-						
-						
+                        </button>
+
+
 
                         <button class="login100-form-btn mt-3" onclick="location.href='Registrar.php'">
                             Registrarse
