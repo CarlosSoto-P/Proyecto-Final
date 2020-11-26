@@ -39,7 +39,7 @@
       mysqli_query($connLocalhost, $queryInsertUser) or trigger_error("El query de inserción de usuarios falló");
 
       // Redireccionamos al usuario al Panel de Control
-      header("Location: NooCUPADO/asesores.php?insertUser=true");
+      header("Location:index.php?insertUser=true");
     }
 
   }
