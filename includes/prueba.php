@@ -1,1 +1,1 @@
-aver al cine
+aver al cine, chinga tu madre puta, naa mentira bendiciones uwu

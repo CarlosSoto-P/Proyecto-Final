@@ -5,6 +5,13 @@
     
 
   if(!isset($_SESSION['id'])) header('Location: login.php');
+
+if(isset($_POST['update_sent'])){
+
+
+}
+
+
 }
 
 ?>
@@ -48,44 +55,45 @@
                     <div style="padding-top:30px" class="panel-body">
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                        <form id="registerform" class="form-horizontal" role="form">
+                        
+                        <form id="editarUsuario" method='post' class="form-horizontal" role="form">
 
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nombre" type="text" class="form-control" name="username" value=""
+                                <input id="nombre" type="text" class="form-control" name="nombres" value=""
                                     placeholder="Nombre completo.">
                             </div>
 
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="apellidos" type="text" class="form-control" name="username" value=""
+                                <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
                                     placeholder="Apellidos.">
                             </div>
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="telefono" type="text" class="form-control" name="username" value=""
+                                <input id="telefono" type="text" class="form-control" name="telefono" value=""
                                     placeholder="Telefono.">
                             </div>
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="correo" type="text" class="form-control" name="username" value=""
+                                <input id="correo" type="text" class="form-control" name="correo" value=""
                                     placeholder="Correo.">
                             </div>
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="contraseña" type="password" class="form-control" name="username" value=""
+                                <input id="contraseña" type="password" class="form-control" name="contraseña" value=""
                                     placeholder="contraseña">
                             </div>
 
                             <div style="margin-bottom: 15px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="contraseñaR" type="password" class="form-control" name="username" value=""
+                                <input id="contraseñaR" type="password" class="form-control" name="contraseña2" value=""
                                     placeholder="Repita su contraseña">
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState">Rol</label>
                                 <select id="inputState" class="form-control">
-                                    <option selected>Alumno</option>
+                                    <option>Alumno</option>
                                     <option>Asesor</option>
                                 </select>
                             </div>
@@ -94,7 +102,7 @@
                             <div style="margin-top:20px" class="form-group float-right">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls">
-                                    <a id="btn-editar" href="#" class="btn btn-info">Guardar </a>
+                                    <a id="btn-editar" name ="update_sent" class="btn btn-info">Guardar </a>
                                 </div>
 
                             </div>
