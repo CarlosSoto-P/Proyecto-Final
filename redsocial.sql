@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2020 a las 23:56:14
+-- Tiempo de generación: 27-11-2020 a las 00:30:00
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `redsocial`
--- primero deben crear la base de datos, ya despues pegan esto
+--
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,8 @@ CREATE TABLE `publicacion` (
   `idGrupo` int(100) NOT NULL,
   `idUsuario` int(100) NOT NULL,
   `contenido` varchar(150) NOT NULL,
-  `titulo` varchar(50) NOT NULL
+  `titulo` varchar(50) NOT NULL,
+  `megusta` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -101,8 +102,16 @@ CREATE TABLE `usuario` (
   `correo` varchar(50) NOT NULL,
   `contraseña` varchar(20) NOT NULL,
   `rol` varchar(30) NOT NULL,
-  `descripción` varchar(200) NOT NULL
+  `descripcion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nombres`, `apellidos`, `telefono`, `correo`, `contraseña`, `rol`, `descripcion`) VALUES
+(1, 'Carlos Alberto', 'Soto Pacheco', '6221698224', 'Carlos.soto.2000@hotmail.com', '6221098703', 'Alumno', 'Hola, me encanta aprender.'),
+(2, 'Evert Josmar', 'Soto Pacheco', '6221098703', 'everto@gmail.com', '123', 'Alumno', 'Hola, c:');
 
 --
 -- Índices para tablas volcadas
@@ -170,7 +179,7 @@ ALTER TABLE `solicitud`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
