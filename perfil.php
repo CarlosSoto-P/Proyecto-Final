@@ -1,3 +1,13 @@
+<?php
+  // Inicializamos la sesion o la retomamos
+  if(!isset($_SESSION)) {
+    session_start();
+    
+
+  if(!isset($_SESSION['id'])) header('Location: login.php');
+}
+
+?>
 
 
 <!DOCTYPE html>

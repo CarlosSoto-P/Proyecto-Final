@@ -45,7 +45,7 @@ function MM_jumpMenuGo(objId,targ,restore){ //v9.0
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/estiloz.css">
+    <link rel="stylesheet" href="css/estilos.css">
   </head>
   <body>
 

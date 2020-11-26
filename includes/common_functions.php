@@ -18,6 +18,6 @@
   if(isset($_GET['logOff']) && $_GET['logOff'] == "true") {
     //When in doubt, ask Metallica
     session_destroy();
-   header('Location: iniciarSesion.php?loggedOff=true');
+   header('Location: login.php?loggedOff=true');
   }
 ?>

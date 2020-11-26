@@ -2,8 +2,15 @@
   // Inicializamos la sesion o la retomamos
   if(!isset($_SESSION)) {
     session_start();
-    // Protegemos el documento para que solamente sea visible cuando HAS INICIADO sesión
-    #if(!isset($_SESSION['userId'])) header('Location: login.php?auth=false');
+    
+
+  if(!isset($_SESSION['id'])) header('Location: login.php');
+
+
+  // Incluimos la conexión a la base de datos
+
+    
+
   }
 
   include("connections/conn_localhost.php");
