@@ -1,4 +1,7 @@
 <?php
+
+include("connections/conn_localhost.php");
+
   // Inicializamos la sesion o la retomamos
   if(!isset($_SESSION)) {
     session_start();
@@ -6,10 +9,45 @@
 
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-if(isset($_POST['update_sent'])){
+  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
+);
 
+$resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
 
-}
+$userData= mysqli_fetch_assoc($resQueryUserData);
+
+if(isset($_POST['update_sent'])) {
+    // Vamos a validar que no existan cajas vacias
+    foreach($_POST as $calzon => $caca) {
+      if($caca == '' && $calzon != "telefono") $error[] = "La caja $calzon es requerida";
+    }
+
+    // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
+    if(!isset($error)) {
+      // Preparamos la consulta para guardar el registro en la BD
+      $queryUpdateUser = sprintf("UPDATE usuario SET nombres = '%s', apellidos = '%s', contraseña= '%s', telefono = '%s', rol = '%s' WHERE id = %d",
+        mysqli_real_escape_string($connLocalhost, trim($_POST['nombres'])),
+        mysqli_real_escape_string($connLocalhost, trim($_POST['apellidos'])),
+        mysqli_real_escape_string($connLocalhost, trim($_POST['contraseña'])),
+        mysqli_real_escape_string($connLocalhost, trim($_POST['telefono'])),
+        mysqli_real_escape_string($connLocalhost, trim($_POST['rol'])),
+        mysqli_real_escape_string($connLocalhost, trim($_POST['userId']))
+      );
+
+      // Ejecutamos el query
+      $resQueryUserUpdate = mysqli_query($connLocalhost, $queryUpdateUser) or trigger_error("El query de actualización de usuario falló");
+
+      // Evaluamos el resultado de la ejecución del query
+      if($resQueryUserUpdate) {
+        header("Location: userUpdateAdmin.php?userId=".$_POST['userId']."&updatedProfile=true");
+      }
+    }
+
+  }
+  else {
+    
+  }
 
 
 }
@@ -36,12 +74,13 @@ if(isset($_POST['update_sent'])){
 
     <! -- cabecera -->
         <?php include("includes/header.php"); 
-        include("includes/barraLateral.php")
+        include("includes/common_functions.php");
+        include("includes/barraLateral.php");
         ?>
-        
+
 
         <!------ Include the above in your HEAD tag ---------->
-
+        
         <div class="container">
             <div id="loginbox" style="margin-top:50px;"
                 class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -55,7 +94,7 @@ if(isset($_POST['update_sent'])){
                     <div style="padding-top:30px" class="panel-body">
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                        
+
                         <form id="editarUsuario" method='post' class="form-horizontal" role="form">
 
                             <div style="margin-bottom: 15px" class="input-group">
@@ -92,9 +131,15 @@ if(isset($_POST['update_sent'])){
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState">Rol</label>
-                                <select id="inputState" class="form-control">
-                                    <option>Alumno</option>
-                                    <option>Asesor</option>
+                                <select id="rol" name="rol" class="form-control">
+                                    <option value="Asesor"
+                                        <?php echo ($userData['rol'] == "Asesor") ? "selected" : ""; ?>>Asesor</option>
+
+                                    <option value="Alumno"
+                                        <?php echo ($userData['rol'] == "Alumno") ? "selected" : ""; ?>>Alumno</option>
+
+
+
                                 </select>
                             </div>
 
@@ -102,10 +147,15 @@ if(isset($_POST['update_sent'])){
                             <div style="margin-top:20px" class="form-group float-right">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls">
-                                    <a id="btn-editar" name ="update_sent" class="btn btn-info">Guardar </a>
+
+                                    <button id="btn-editar" name="update_sent" class="btn btn-info">
+                                        Guardar
+                                    </button>
                                 </div>
 
                             </div>
+
+                          
 
                         </form>
                     </div>
