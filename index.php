@@ -149,11 +149,11 @@
                     </div>
                     <hr>
 
-                    <!--- \\\\\\\Post-->
+                    <!--- \\\\\\\publicaciones-->
 
                     <?php
 
-                            for ($i=0; $i <10; $i++):
+                            for ($i=0; $i <100; $i++):
                             ?>
 
                     <div class="card gedf-card">
@@ -166,25 +166,16 @@
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">@LeeCross</a>
+                                            <a href="perfil.php">@LeeCross
+                                            <?php echo($i)?>
+                                            </a>
                                         </div>
                                         <div class="h7 text-muted">Miracles Lee Cross</div>
                                         <a class="text-muted" href="#">>En Grupo</a>
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <a class="dropdown-item" href="#">Save</a>
-                                            <a class="dropdown-item" href="#">Hide</a>
-                                            <a class="dropdown-item" href="#">Report</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
 

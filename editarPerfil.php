@@ -28,7 +28,10 @@
 
 
     <! -- cabecera -->
-        <?php include("includes/header.php"); ?>
+        <?php include("includes/header.php"); 
+        include("includes/barraLateral.php")
+        ?>
+        
 
         <!------ Include the above in your HEAD tag ---------->
 

@@ -45,6 +45,8 @@
 
     <! -- cabecera -->
         <?php include("includes/header.php"); ?>
+        <?php include("includes/barraLateral.php"); ?>
+
         <hr>
 
         <div class="container">
@@ -71,7 +73,6 @@
                                        ?>
                                         </p>
                                        
-                                        <button class="btn btn-primary" onclick="location.href='editarPerfil.php'">Editar Perfil</button>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +157,9 @@
                         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
                         crossorigin="anonymous">
                     </script>
+
+
+
 </body>
 
 </html>

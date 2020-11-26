@@ -26,7 +26,10 @@
 
 
     <! -- cabecera -->
-        <?php include("includes/header.php"); ?>
+        <?php include("includes/header.php"); 
+        include("includes/barraLateral.php")
+        ?>
+        
         <hr>
 
         <div class="container">
