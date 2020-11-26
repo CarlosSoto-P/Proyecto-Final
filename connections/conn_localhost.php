@@ -1,9 +1,9 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
 $servidor = "localhost"; // Puede ser una ubicación remota
-$baseDatos = "redsocial";
+$baseDatos = "cursos";
 $usuarioBd = "root";
-$passwordBd = "";
+$passwordBd = "iswBD2101";
 
 // Creamos la conexión
 $connLocalhost = mysqli_connect($servidor, $usuarioBd, $passwordBd) or trigger_error(mysqli_error(), E_USER_ERROR);
