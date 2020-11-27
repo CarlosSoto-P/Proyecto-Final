@@ -93,13 +93,16 @@ if(isset($_POST['login_sent'])) {
 
     <div>
         <div class="container-login100">
-            <div class="wrap-login100">
+       
                 <form class="login100-form validate-form" action="login.php" method="post">
                     <span class="login100-form-title p-b-43">
 
                         <span class="text-primary">Let's</span> Teach
                     </span>
-                    <div class="wrap-input100 validate-input" data-validate="El nombre es requerido">
+                    <div class = "conteiner">
+                    <div class="wrap-input100 validate-input"  data-validate="El nombre es requerido">
+     
+  
                         <input class="input100" type="text" name="nombre">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Nombres</span>
@@ -130,7 +133,7 @@ if(isset($_POST['login_sent'])) {
                     </div>
 
 
-
+                    </div>
 
                     <div class="container-login100-form-btn">
                     
