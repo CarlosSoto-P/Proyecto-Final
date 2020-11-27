@@ -1,6 +1,6 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com.net"; // Puede ser una ubicación remota
+$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com"; // Puede ser una ubicación remota
 $baseDatos = "byvwn65uxblxcrtg2waf";
 
 //$usuarioBd = "root";
