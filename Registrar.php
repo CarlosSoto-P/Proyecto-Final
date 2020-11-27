@@ -57,7 +57,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/estilosregistrar.css">
   </head>
   <body>
 
@@ -70,9 +70,22 @@
     <input type="text" placeholder="Nombre" name = "nombre">
   </div>
   <div class="textbox">
-    <i class="fas fa-user"></i>
+   
+    <input type="text" placeholder="Apellido" name = "apellido">
+  </div>
+  <div class="textbox">
+   
     <input type="text" placeholder="Correo" name = "correo">
   </div>
+  <div class="textbox">
+   
+   <input type="text" placeholder="Telefono" name = "telefono">
+ </div>
+  <div class="textbox">
+   
+   <input type="text" placeholder="Descripcion" name = "descripcion">
+ </div>
+
  
   <div class="textbox">
     <select name="tipoUsuario" id="tipoUsuario">
@@ -98,7 +111,7 @@
  
 
 
-  <button class="pulse" name ="registrar" onclick="location.href='NooCUPADO/asesores.html'">Registrarse </button>
+  <button class="pulse" name ="registrar" onclick="location.href='index.php'">Registrarse </button>
  
   </form>
  
