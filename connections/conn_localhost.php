@@ -1,12 +1,12 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "db4free.net"; // Puede ser una ubicación remota
-$baseDatos = "redsocial";
+$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com.net"; // Puede ser una ubicación remota
+$baseDatos = "byvwn65uxblxcrtg2waf";
 
 //$usuarioBd = "root";
 //<<<<<<< Updated upstream
-$usuarioBd = "teamisw";
-$passwordBd = "207f1530c8";
+$usuarioBd = "ux85zoov8qpiup9m";
+$passwordBd = "Uen756wgHtkYiNgxtd52";
 //=======
 //$usuarioBd = "root";
 //$passwordBd = "iswBD2101";
