@@ -1,11 +1,11 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "localhost"; // Puede ser una ubicación remota
-$baseDatos = "redsocial";
+$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com"; // Puede ser una ubicación remota
+$baseDatos = "byvwn65uxblxcrtg2waf";
 
 //$usuarioBd = "root";
-$usuarioBd = "root";
-$passwordBd = "";
+$usuarioBd = "ux85zoov8qpiup9m";
+$passwordBd = "Uen756wgHtkYiNgxtd52";
 //$passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";
