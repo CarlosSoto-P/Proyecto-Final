@@ -4,7 +4,7 @@ $servidor = "localhost"; // Puede ser una ubicación remota
 $baseDatos = "redsocial";
 
 //$usuarioBd = "root";
-$usuarioBd = "root@localhost";
+$usuarioBd = "root";
 $passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";

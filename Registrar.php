@@ -6,11 +6,13 @@
   if(isset($_POST['registrar'])) {
 
       // Validamos si las cajas están vacias
-  foreach ($_POST as $calzon => $caca) {
-    if($caca == "") $error[] = "La caja $calzon es obligatoria";
-    }
+  //
     // Validación de passwords coincidentes
-   
+    if($_POST['contraseña'] != $_POST['ConfirmarContraseña']){
+      $error[] = "Los passwords no son coincidentes";
+     
+      echo "el password no coincide";
+  }
 
     // Validación de email
     // Preparamos la consulta para determinar si el email porporcionado ya existe en la BD
@@ -24,6 +26,7 @@
     // Contar el recordset para determinar si se encontró el correo en la BD
     if(mysqli_num_rows($resQueryCheckEmail)) {
       $error[] = "El correo proporcionado ya está siendo utilizado";
+      
     }
 
     // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
