@@ -99,7 +99,7 @@
                             ?>
                                 <ul>
                                     <li>
-                                        <a href="#" class="text-dark">Nombre</a>
+                                        <a href="grupo.php" class="text-dark">Nombre</a>
                                     </li>
                                 </ul>
                                 <?php endfor ?>
