@@ -139,43 +139,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                 <div class="col-md-6 gedf-main">
 
-                    <!--- \\\\\\\Post
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                        aria-controls="posts" aria-selected="true">Hacer una publicación</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                    aria-labelledby="posts-tab">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="message">post</label>
-                                        <textarea class="form-control" id="message" rows="3"
-                                            placeholder="¿Que estas pensando?"></textarea>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="btn-toolbar justify-content-between">
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary">Publicar</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    -->
+                  
                     <hr>
                     <div class="text-center bg-info text-white h1">
                         Publicaciones de tus Grupos
