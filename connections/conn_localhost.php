@@ -1,11 +1,11 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "localhost"; // Puede ser una ubicación remota
+$servidor = "db4free.net"; // Puede ser una ubicación remota
 $baseDatos = "redsocial";
 
 //$usuarioBd = "root";
-$usuarioBd = "root";
-$passwordBd = "";
+$usuarioBd = "teamisw";
+$passwordBd = "207f1530c8";
 //$passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";
