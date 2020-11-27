@@ -1,11 +1,16 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "localhost"; // Puede ser una ubicación remota
-$baseDatos = "redsocial";
+$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com.net"; // Puede ser una ubicación remota
+$baseDatos = "byvwn65uxblxcrtg2waf";
 
 //$usuarioBd = "root";
-$usuarioBd = "root";
-$passwordBd = "";
+//<<<<<<< Updated upstream
+$usuarioBd = "ux85zoov8qpiup9m";
+$passwordBd = "Uen756wgHtkYiNgxtd52";
+//=======
+//$usuarioBd = "root";
+//$passwordBd = "iswBD2101";
+//>>>>>>> Stashed changes
 //$passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";
