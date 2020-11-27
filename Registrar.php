@@ -57,7 +57,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/estilosregistrar.css">
   </head>
   <body>
 
@@ -77,15 +77,15 @@
    
     <input type="text" placeholder="Correo" name = "correo">
   </div>
-
+  <div class="textbox">
+   
+   <input type="text" placeholder="Telefono" name = "telefono">
+ </div>
   <div class="textbox">
    
    <input type="text" placeholder="Descripcion" name = "descripcion">
  </div>
- <div class="textbox">
-   
-   <input type="text" placeholder="Telefono" name = "telefono">
- </div>
+
  
   <div class="textbox">
     <select name="tipoUsuario" id="tipoUsuario">
