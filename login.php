@@ -13,7 +13,7 @@ include("includes/common_functions.php");
 
 // Evaluamos si el formulario ha sido enviado
 if(isset($_POST['login_sent'])) {
-	header ('Location: perfil.php');
+	
 	
   // Validamos si las cajas están vacias
   foreach ($_POST as $calzon => $caca) {

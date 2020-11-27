@@ -1,15 +1,3 @@
-<?php
-  // Inicializamos la sesion o la retomamos
-  if(!isset($_SESSION)) {
-    session_start();
-    
-
-  if(!isset($_SESSION['id'])) header('Location: login.php');
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +17,7 @@
         <?php include("includes/header.php"); 
         include("includes/barraLateral.php")
         ?>
-        
+
         <hr>
 
         <div class="container">
@@ -123,6 +111,13 @@
                         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
                         crossorigin="anonymous">
                     </script>
+
+
+                </div>
+
+            </div>
+
+        </div>
 </body>
 
 </html>

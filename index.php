@@ -1,11 +1,20 @@
 <?php
+  include("connections/conn_localhost.php");
+
   // Inicializamos la sesion o la retomamos
   if(!isset($_SESSION)) {
     session_start();
   }
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-
+  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
+  );
+  
+  $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+  
+  $userData= mysqli_fetch_assoc($resQueryUserData);
+  
   // Incluimos la conexión a la base de datos
 
     
@@ -59,7 +68,7 @@
                             <div class="h5">
                                 <a href="miPerfil.php">
                                     <?php 
-                                echo($_SESSION['nombres'])
+                                echo($userData['nombres'])
                                 ?>
                                 </a>
 
@@ -68,7 +77,7 @@
 
 
                                 <?php 
-                            echo($_SESSION['descripcion'])
+                            echo($userData['descripcion'])
                             ?>
                             </div>
                         </div>
