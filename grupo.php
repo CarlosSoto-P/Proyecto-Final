@@ -40,6 +40,9 @@ include("connections/conn_localhost.php");
         <div class="container-fluid gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
+
+
+                <section>
                     <div class="card">
 
                         <div class="card-body">
@@ -61,6 +64,10 @@ include("connections/conn_localhost.php");
                         </div>
 
                     </div>
+                </section>
+
+                
+                <section>
 
                     <div class="card">
                         <div class="card-body">
@@ -87,6 +94,8 @@ include("connections/conn_localhost.php");
                         </div>
 
                     </div>
+
+                </section>
                 </div>
 
 
@@ -96,7 +105,7 @@ include("connections/conn_localhost.php");
                     
                     <hr>
                     <div class="text-center bg-info text-white h1">
-                        Publicaciones de tus Grupos
+                        Publicaciones
                     </div>
                     <hr>
 
@@ -117,12 +126,12 @@ include("connections/conn_localhost.php");
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">@LeeCross
+                                            <a href="perfil.php">@nombreUsuarioMiembro
                                             <?php echo($i)?>
                                             </a>
                                         </div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                        <a class="text-muted" href="#">>En Grupo</a>
+                                        <div class="h7 text-muted">nombreCompletoMiembro</div>
+                                        <a class="text-muted" href="#">>nombreGrupo</a>
                                     </div>
                                 </div>
                                 <div>
