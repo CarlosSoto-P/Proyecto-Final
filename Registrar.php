@@ -5,6 +5,10 @@
   // Lo primero que haremos será validar si el formulario ha sido enviado
   if(isset($_POST['registrar'])) {
 
+      // Validamos si las cajas están vacias
+  foreach ($_POST as $calzon => $caca) {
+    if($caca == "") $error[] = "La caja $calzon es obligatoria";
+    }
     // Validación de passwords coincidentes
     if($_POST['contraseña'] != $_POST['ConfirmarContraseña']){
       $error[] = "Los passwords no son coincidentes";
@@ -12,8 +16,8 @@
 
     // Validación de email
     // Preparamos la consulta para determinar si el email porporcionado ya existe en la BD
-    $queryCheckEmail = sprintf("SELECT id FROM usuarios WHERE correo = '%s'",
-      mysqli_real_escape_string($connLocalhost, trim($_POST['correo']))
+    $queryCheckEmail = sprintf("SELECT idUsuario FROM usuario WHERE correo = '%s'",
+      mysqli_real_escape_string($connLocalhost, trim($_POST['correos']))
     );
 
     // Ejecutamos el query 
@@ -27,11 +31,14 @@
     // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
     if(!isset($error)) {
       // Preparamos la consulta para guardar el registro en la BD
-      $queryInsertUser = sprintf("INSERT INTO escuela.usuarios (contraseña, nombre, correo, tipoUsuario) VALUES ('%s', '%s', '%s', '%s')",
-          mysqli_real_escape_string($connLocalhost, trim($_POST['contraseña'])),
+      $queryInsertUser = sprintf("INSERT INTO usuario (nombres, apellidos, telefono, correo,contraseña,rol,descripción) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
           mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
-          mysqli_real_escape_string($connLocalhost, trim($_POST['correo'])),
-          mysqli_real_escape_string($connLocalhost, trim($_POST['tipoUsuario']))
+          mysqli_real_escape_string($connLocalhost, trim($_POST['apellido'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['telefono'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['correos'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['contraseña'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['tipoUsuario'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['descripcion']))
 
       );
 
@@ -75,7 +82,7 @@
   </div>
   <div class="textbox">
    
-    <input type="text" placeholder="Correo" name = "correo">
+    <input type="text" placeholder="Correo" name = "correos">
   </div>
   <div class="textbox">
    
