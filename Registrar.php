@@ -70,9 +70,22 @@
     <input type="text" placeholder="Nombre" name = "nombre">
   </div>
   <div class="textbox">
-    <i class="fas fa-user"></i>
+   
+    <input type="text" placeholder="Apellido" name = "apellido">
+  </div>
+  <div class="textbox">
+   
     <input type="text" placeholder="Correo" name = "correo">
   </div>
+
+  <div class="textbox">
+   
+   <input type="text" placeholder="Descripcion" name = "descripcion">
+ </div>
+ <div class="textbox">
+   
+   <input type="text" placeholder="Telefono" name = "telefono">
+ </div>
  
   <div class="textbox">
     <select name="tipoUsuario" id="tipoUsuario">
@@ -98,7 +111,7 @@
  
 
 
-  <button class="pulse" name ="registrar" onclick="location.href='NooCUPADO/asesores.html'">Registrarse </button>
+  <button class="pulse" name ="registrar" onclick="location.href='index.php'">Registrarse </button>
  
   </form>
  
