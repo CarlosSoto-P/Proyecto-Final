@@ -15,9 +15,23 @@
   
   $userData= mysqli_fetch_assoc($resQueryUserData);
   
-  // Incluimos la conexión a la base de datos
 
-    
+  //consusltar grupos en los que este el usuario
+
+  $query_ingrupo = sprintf("SELECT
+  grupo.idGrupo AS 'idGrupo',
+  grupo.nombre AS 'nombreGrupo'
+  FROM miembros 
+  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
+  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
+  WHERE miembros.idUsuario = %d",
+mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
+);
+
+$resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+$inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
+
 
 ?>
 
@@ -87,22 +101,32 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="h5">
-                                <h5 class="text-primary">Grupos</h5>
+                                <h5 class="text-primary">Estas en estos grupos</h5>
 
 
 
                             </div>
                             <div clas="h5">
+
+
+
+
                                 <?php
-                            for ($i=0; $i <15; $i++):
-                            
+                            do{
                             ?>
                                 <ul>
                                     <li>
-                                        <a href="grupo.php" class="text-dark">Nombre</a>
+                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>" class="text-dark">
+
+                                            <?php 
+                                        echo($inGrupo['nombreGrupo']);
+                                        ?>
+                                        </a>
                                     </li>
                                 </ul>
-                                <?php endfor ?>
+                                <?php } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
+                                
+                                ?>
 
                             </div>
 
@@ -176,7 +200,7 @@
                                         <div class="h5 m-0">
 
                                             <a href="perfil.php">@LeeCross
-                                            <?php echo($i)?>
+                                                <?php echo($i)?>
                                             </a>
                                         </div>
                                         <div class="h7 text-muted">Miracles Lee Cross</div>
@@ -184,7 +208,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    
+
                                 </div>
                             </div>
 
