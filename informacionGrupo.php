@@ -1,3 +1,8 @@
+
+<?php
+include("connections/conn_localhost.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
