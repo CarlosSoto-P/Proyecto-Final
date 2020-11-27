@@ -10,9 +10,7 @@
     if($caca == "") $error[] = "La caja $calzon es obligatoria";
     }
     // Validación de passwords coincidentes
-    if($_POST['contraseña'] != $_POST['ConfirmarContraseña']){
-      $error[] = "Los passwords no son coincidentes";
-    }
+   
 
     // Validación de email
     // Preparamos la consulta para determinar si el email porporcionado ya existe en la BD
