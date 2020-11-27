@@ -5,7 +5,7 @@ $baseDatos = "redsocial";
 
 //$usuarioBd = "root";
 $usuarioBd = "root";
-$passwordBd = "iswBD2101";
+$passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";
 //$passwordBd = "";

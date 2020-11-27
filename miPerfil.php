@@ -63,16 +63,16 @@
                                         class="rounded-circle" width="150">
                                     <div class="mt-3">
                                         <h4>
-                                        <?php 
+                                            <?php 
                                        echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
                                        ?>
                                         </h4>
                                         <p class="text-secondary mb-1">
-                                        <?php 
+                                            <?php 
                                        echo($loggedUserDetail['descripcion'])
                                        ?>
                                         </p>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         <h6 class="mb-0">Nombre Completo</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                       <?php 
+                                        <?php 
                                        echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
                                        ?>
                                     </div>
@@ -101,7 +101,7 @@
                                         <h6 class="mb-0">Correo</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <?php 
+                                        <?php 
                                        echo($loggedUserDetail['correo'])
                                        ?>
 
@@ -113,7 +113,7 @@
                                         <h6 class="mb-0">Telefono</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <?php 
+                                        <?php 
                                        echo($loggedUserDetail['telefono'])
                                        ?>
                                     </div>
@@ -124,7 +124,7 @@
                                         <h6 class="mb-0">Rol</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <?php 
+                                        <?php 
                                        echo($loggedUserDetail['rol'])
                                        ?>
                                     </div>
@@ -135,7 +135,7 @@
                                         <h6 class="mb-0">Mi descripción</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <?php 
+                                        <?php 
                                        echo($loggedUserDetail['descripcion'])
                                        ?>
                                     </div>
@@ -157,7 +157,7 @@
                         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
                         crossorigin="anonymous">
                     </script>
-
+                </div>
 
 
 </body>
