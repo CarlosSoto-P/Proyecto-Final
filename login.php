@@ -49,7 +49,7 @@ if(isset($_POST['login_sent'])) {
 
 	header('Location: index.php');
 }else{
-	header('Location: index.php');
+	header('Location: indexAsesor.php');
 
 }
 
