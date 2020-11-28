@@ -1,6 +1,20 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+<body>
+<?php
+?>
  <?php
- include "connections/conn_localhost.php";
+ 
+ include("connections/conn_localhost.php");
+ include("includes/common_functions.php");
+
+
+ 
     $consulta = "SELECT * FROM byvwn65uxblxcrtg2waf.message ;";
     $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
         while ($fila = $resQueryMessage->fetch_array()): 
@@ -11,3 +25,9 @@
              <span style="float:right;"><?php echo formatfecha($fila['fecha']) ?></span>
     </div>
 <?php endwhile;?>
+</body>
+</html>
+
+
+
+

@@ -112,42 +112,65 @@ if($_POST['contraseña'] != $_POST['contraseña2']){
 
                                 <form id="editarUsuario" method='post' class="form-horizontal" role="form">
 
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="nombres" value=""
-                                            placeholder="Nombre completo.">
+                                        <div class="mt-1">
+                                            <label for="nombres" class="mr-3 blockquote">Nombres</label>
+                                        </div>
+
+                                        <input type="text" class="form-control" name="nombres" value="<?php echo($userData['nombres'])?>"
+                                            >
                                     </div>
 
 
 
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="apellidos" class="mr-3 blockquote">Apellidos</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="apellidos" value=""
-                                            placeholder="Apellidos.">
+                                        <input type="text" class="form-control" name="apellidos" value="<?php echo($userData['apellidos'])?>"
+                                           >
                                     </div>
 
                                     <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="descripcion" class="mr-3 blockquote">Descripcion</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="descripcion" value=""
-                                            placeholder="Descripcion.">
+                                        <input type="text" class="form-control" name="descripcion" value="<?php echo($userData['descripcion'])?>"
+                                           >
                                     </div>
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="telefono" class="mr-3 blockquote">Telefono</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="telefono" value=""
-                                            placeholder="Telefono.">
+                                        <input type="text" class="form-control" name="telefono" value="<?php echo($userData['telefono'])?>"
+                                            >
                                     </div>
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="correo" class="mr-3 blockquote">Correo</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="correo" value=""
-                                            placeholder="Correo.">
+                                        <input type="text" class="form-control" name="correo" value="<?php echo($userData['correo'])?>"
+                                            >
                                     </div>
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="contraseña" class="mr-3 blockquote">Contraseña</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="password" class="form-control" name="contraseña" value=""
                                             placeholder="contraseña">
                                     </div>
 
-                                    <div style="margin-bottom: 15px" class="input-group">
+                                    <div style="margin-bottom: 15px">
+                                        <div class="mt-1">
+                                            <label for="contraseña2" class="mr-3 blockquote">Repita la
+                                                contraseña</label>
+                                        </div>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input type="password" class="form-control" name="contraseña2" value=""
                                             placeholder="Repita su contraseña">

@@ -15,10 +15,11 @@ mysqli_query($connLocalhost, "SET NAMES 'utf8'");
 
 // Seleccionamos la base de datos por defecto para el proyecto
 mysqli_select_db($connLocalhost, $baseDatos);
+#me daba problemas, las funciones se declaran en includes/common_functions c:
+#ya lo arregle, te faltaba hacer el include del archivo en la que estaba la funcion
+#function formatfecha($fecha){
 
-function formatfecha($fecha){
-
-    return date('g:i a',strtotime($fecha));
-}
+#   return date('g:i a',strtotime($fecha));
+#}
 
 ?>

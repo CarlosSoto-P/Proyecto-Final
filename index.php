@@ -116,7 +116,8 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                             ?>
                                 <ul>
                                     <li>
-                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>" class="text-dark">
+                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>"
+                                            class="text-dark">
 
                                             <?php 
                                         echo($inGrupo['nombreGrupo']);
@@ -139,7 +140,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                 <div class="col-md-6 gedf-main">
 
-                  
+
                     <hr>
                     <div class="text-center bg-info text-white h1">
                         Publicaciones de tus Grupos
@@ -178,7 +179,6 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                         </div>
                         <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
 
                             <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
 
@@ -190,9 +190,9 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> 12 Like</a>
 
+                            <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
                         </div>
                     </div>
                     <br>

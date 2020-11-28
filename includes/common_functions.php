@@ -13,6 +13,13 @@
     }
     echo '</div>';
   }
+function formatfecha($fecha){
+
+   return date('g:i a',strtotime($fecha));
+}
+
+
+
 
   // Lógica de cierre de sesión
   if(isset($_GET['logOff']) && $_GET['logOff'] == "true") {
