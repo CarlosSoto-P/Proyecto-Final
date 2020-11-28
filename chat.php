@@ -6,7 +6,7 @@
         while ($fila = $resQueryMessage->fetch_array()): 
 ?>
     <div id="data-chat">
-            <span style="color:#1c62c4;"><?php echo $fila['nombre'] ?>: </span>
+            <span style="color:#1c62c4;"><?php echo $fila['idnombre'] ?>: </span>
              <span style="color:#848484;"><?php echo $fila['mensaje'] ?></span>
              <span style="float:right;"><?php echo formatfecha($fila['fecha']) ?></span>
     </div>
