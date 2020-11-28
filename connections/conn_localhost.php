@@ -16,4 +16,9 @@ mysqli_query($connLocalhost, "SET NAMES 'utf8'");
 // Seleccionamos la base de datos por defecto para el proyecto
 mysqli_select_db($connLocalhost, $baseDatos);
 
+function formatfecha($fecha){
+
+    return date('g:i a',strtotime($fecha));
+}
+
 ?>
