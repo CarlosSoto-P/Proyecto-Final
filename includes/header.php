@@ -17,7 +17,7 @@
                 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Chat</a>
+                    <a class="nav-link" href="mensajes.php">Chat</a>
                 </li>
 
 
