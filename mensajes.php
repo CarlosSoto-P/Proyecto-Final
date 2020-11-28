@@ -1,6 +1,9 @@
 <?php
 include "connections/conn_localhost.php";
 
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +53,7 @@ setInterval(function(){ajax();},1000);
         $nombre = $_POST['nombre'];
         $mensaje = $_POST['mensaje'];
 
-         $consulta = sprintf("INSERT INTO message (nombre, mensaje) VALUES ('%s','%s')",
+         $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
          mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
          mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
 
