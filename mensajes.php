@@ -10,7 +10,7 @@ include "connections/conn_localhost.php";
     <title>Chat</title>
     
        
-    <link rel="stylesheet" href="css/stylemssg.css">
+    <link rel="stylesheet" href="css/mssgstyle.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
 <link href="https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200&display=swap" rel="stylesheet">
