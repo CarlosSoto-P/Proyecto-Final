@@ -30,7 +30,12 @@ mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
 
 $resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
 
+
+$resquery_ingrupo2 = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
 $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
+
+
 
 
 ?>
@@ -125,8 +130,14 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                         </a>
                                     </li>
                                 </ul>
-                                <?php } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
+
+                                <?php 
+                                //lleno por cada fecth el id de los grupos
+                                $idGrupos []= $inGrupo['idGrupo']; 
                                 
+                            } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
+                           
+                           
                                 ?>
 
                             </div>
@@ -151,7 +162,32 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                     <?php
 
-                            for ($i=0; $i <100; $i++):
+
+                        //query para sacar las publicaciones de la base de datos
+                            
+
+
+                        $ids = implode(",",$idGrupos);
+                        
+                        $query_publicaciones = ("SELECT 
+                        usuario.idUsuario as 'idUsuario',
+                        usuario.nombres as 'nombre',
+                        usuario.apellidos as 'apellido',
+                        grupo.idGrupo as 'idGrupo',
+                        grupo.nombre as 'grupo',
+                        publicacion.titulo as 'titulo',
+                        publicacion.contenido as 'contenido',
+                        publicacion.megustas as 'megustas'
+                        from publicacion
+                        LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
+                        LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
+                        where publicacion.idGrupo  in ($ids)");
+
+                        $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
+                        $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
+                        
+
+                            do{
                             ?>
 
                     <div class="card gedf-card">
@@ -164,12 +200,12 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">@LeeCross
-                                                <?php echo($i)?>
+                                            <a href="perfil.php">
+                                                <?php echo($publicaciones['nombre'])?>
                                             </a>
                                         </div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                        <a class="text-muted" href="#">>En Grupo</a>
+                                        <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
+                                        <a class="text-muted" href="#">><?php echo($publicaciones['grupo'])?></a>
                                     </div>
                                 </div>
                                 <div>
@@ -180,13 +216,10 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         </div>
                         <div class="card-body">
 
-                            <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+                            <h5 class="text-primary"><?php echo($publicaciones['titulo'])?></h5>
 
                             <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-                                eos
-                                ipsa praesentium esse magnam nemo dolor
-                                sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                            <?php echo($publicaciones['contenido'])?>
                             </p>
                         </div>
                         <div class="card-footer">
@@ -198,7 +231,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                     <br>
                     <hr>
                     <br>
-                    <?php endfor; ?>
+                    <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones)); ?>
                     <!-- Post /////-->
                 </div>
                 <!-- barra lateral -->
