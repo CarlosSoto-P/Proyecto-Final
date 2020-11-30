@@ -1,3 +1,33 @@
+<?php
+  // Inicializamos la sesion o la retomamos
+  if(!isset($_SESSION)) {
+    session_start();
+    
+
+  if(!isset($_SESSION['id'])) header('Location: login.php');
+
+
+  // Incluimos la conexión a la base de datos
+
+    
+
+  }
+
+  include("connections/conn_localhost.php");
+  include("includes/common_functions.php");
+
+  // Recuperamos los datos del usuario tomando la referencia de $_SESSION
+  $queryLoggedUserDetail = "SELECT * FROM usuario WHERE idUsuario = {$_GET['idUsuario']}";
+
+  // Ejecutamos el query
+  $resQueryLoggedUserDetail = mysqli_query($connLocalhost, $queryLoggedUserDetail) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+  // Hacemos un fetch del resultado obtenido
+  $loggedUserDetail = mysqli_fetch_assoc($resQueryLoggedUserDetail);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,9 +44,8 @@
 
 
     <! -- cabecera -->
-        <?php include("includes/header.php"); 
-        include("includes/barraLateral.php")
-        ?>
+        <?php include("includes/header.php"); ?>
+        <?php include("includes/barraLateral.php"); ?>
 
         <hr>
 
@@ -33,11 +62,21 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
                                         class="rounded-circle" width="150">
                                     <div class="mt-3">
-                                        <h4>John Doe</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
-                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                        <h4>
+                                            <?php 
+                                       echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
+                                       ?>
+                                        </h4>
+                                        <p class="text-secondary mb-1">
+                                            <?php 
+                                       echo($loggedUserDetail['descripcion'])
+                                       ?>
+                                        </p>
+
                                         <button class="btn btn-primary">Agregar</button>
                                         <button class="btn btn-outline-primary">Enviar Mensaje</button>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -52,46 +91,57 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
+                                        <h6 class="mb-0">Nombre Completo</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        Kenneth Valdez
+                                        <?php 
+                                       echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
+                                       ?>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
+                                        <h6 class="mb-0">Correo</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        fip@jukmuh.al
+                                        <?php 
+                                       echo($loggedUserDetail['correo'])
+                                       ?>
+
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
+                                        <h6 class="mb-0">Telefono</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        (239) 816-9029
+                                        <?php 
+                                       echo($loggedUserDetail['telefono'])
+                                       ?>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Mobile</h6>
+                                        <h6 class="mb-0">Rol</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        (320) 380-4539
+                                        <?php 
+                                       echo($loggedUserDetail['rol'])
+                                       ?>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
+                                        <h6 class="mb-0">Mi descripción</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        Bay Area, San Francisco, CA
+                                        <?php 
+                                       echo($loggedUserDetail['descripcion'])
+                                       ?>
                                     </div>
                                 </div>
                             </div>
@@ -111,13 +161,9 @@
                         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
                         crossorigin="anonymous">
                     </script>
-
-
                 </div>
 
-            </div>
 
-        </div>
 </body>
 
 </html>

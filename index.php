@@ -102,6 +102,22 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         </div>
 
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="h5">
+                                <h5 class="text-primary">Tus amigos</h5>
+                            </div>
+                            <div clas="h5">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="text-dark">
+                                            amigo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="card">
                         <div class="card-body">
@@ -141,10 +157,10 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                 ?>
 
                             </div>
-
                         </div>
-
                     </div>
+
+
                 </div>
 
 
@@ -200,12 +216,13 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">
-                                                <?php echo($publicaciones['nombre'])?>
+                                            <a href="perfil.php?idUsuario=<?php echo $publicaciones['idUsuario']?>">
+                                               <span class="text-primary"> <?php echo($publicaciones['nombre'])?>
+                                                </span>
                                             </a>
                                         </div>
                                         <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
-                                        <a class="text-muted" href="#">><?php echo($publicaciones['grupo'])?></a>
+                                        <a class="text-dark" href="#">><?php echo($publicaciones['grupo'])?></a>
                                     </div>
                                 </div>
                                 <div>
@@ -216,10 +233,10 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         </div>
                         <div class="card-body">
 
-                            <h5 class="text-primary"><?php echo($publicaciones['titulo'])?></h5>
+                            <h5 class="text-info"><?php echo($publicaciones['titulo'])?></h5>
 
                             <p class="card-text">
-                            <?php echo($publicaciones['contenido'])?>
+                                <?php echo($publicaciones['contenido'])?>
                             </p>
                         </div>
                         <div class="card-footer">
@@ -228,9 +245,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                             <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
                         </div>
                     </div>
-                    <br>
-                    <hr>
-                    <br>
+                    <hr style ="height:2px;border-width:0;color:gray;background-color:gray">
                     <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones)); ?>
                     <!-- Post /////-->
                 </div>
