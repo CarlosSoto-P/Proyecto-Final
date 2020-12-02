@@ -133,7 +133,7 @@ if(isset($_POST['login_sent'])) {
 
 
                         <div class="text-info mt-5">
-                        <a href="Registrar.php" class="h5">¿Aún no tienes cuenta?</a>
+                        <a href="Registro.php" class="h5">¿Aún no tienes cuenta?</a>
 
                         </div>
                     </div>

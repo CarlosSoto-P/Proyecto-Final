@@ -1,3 +1,61 @@
+<?php
+  include("connections/conn_localhost.php");
+
+
+  // Lo primero que haremos será validar si el formulario ha sido enviado
+  if(isset($_POST['registrar_send'])) {
+
+      // Validamos si las cajas están vacias
+  //
+    // Validación de passwords coincidentes
+    if($_POST['contraseña'] != $_POST['confirmarContraseña']){
+      $error[] = "Las contraseñas no son coincidentes";
+     
+      echo ($error);
+  }
+
+    // Validación de email
+    // Preparamos la consulta para determinar si el email porporcionado ya existe en la BD
+    $queryCheckEmail = sprintf("SELECT idUsuario FROM usuario WHERE correo = '%s'",
+      mysqli_real_escape_string($connLocalhost, trim($_POST['correos']))
+    );
+
+    // Ejecutamos el query 
+    $resQueryCheckEmail = mysqli_query($connLocalhost, $queryCheckEmail) or trigger_error("El query de validación de email falló"); // Record set o result set siempre y cuando el query sea de tipo SELECT
+
+    // Contar el recordset para determinar si se encontró el correo en la BD
+    if(mysqli_num_rows($resQueryCheckEmail)) {
+      $error[] = "El correo proporcionado ya está siendo utilizado";
+      
+    }
+
+    // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
+    if(!isset($error)) {
+      // Preparamos la consulta para guardar el registro en la BD
+      $queryInsertUser = sprintf("INSERT INTO usuario (nombres, apellidos, telefono, correo,contraseña,rol,descripcion) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+          mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['apellido'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['telefono'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['correos'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['contraseña'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['tipoUsuario'])),
+          mysqli_real_escape_string($connLocalhost, trim($_POST['descripcion']))
+
+      );
+
+      // Ejecutamos el query en la BD
+      mysqli_query($connLocalhost, $queryInsertUser) or trigger_error("El query de inserción de usuarios falló");
+
+      // Redireccionamos al usuario al Panel de Control
+      header("Location:index.php?insertUser=true");
+    }
+
+  }
+  else {
+    
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,14 +111,12 @@
                                 <div class="input-group">
                                     <label class="label">Rol</label>
                                     <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Alumno
-                                            <input type="radio" checked="checked" name="rol">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Maestro
-                                            <input type="radio" name="rol">
-                                            <span class="checkmark"></span>
-                                        </label>
+                                    <select name="tipoUsuario" id="tipoUsuario">
+            
+            <option value="Asesor">Asesor</option>
+            <option value="Estudiante">Estudiante</option>
+
+        </select>
                                     </div>
                                 </div>
                             </div>
@@ -75,26 +131,26 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">E-mail</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input class="input--style-4" type="email" name="correos">
                                 </div>
                                 <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="email" name="contraseña">
+                                    <input class="input--style-4" type="text" name="contraseña">
                                 </div>
                             </div>
                             <div >
                                 <div class="input-group">
                                     <label class="label">Confirmar Contraseña</label>
-                                    <input class="input--style-4" type="email" name="confirmarContraseña">
+                                    <input class="input--style-4" type="text" name="confirmarContraseña">
                                 </div>
                             </div>
                             
                         </div>
                        
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="registrar">Registrar</button>
+                            <button name="registrar_send" class="btn btn--radius-2 btn--blue" type="registrar">Registrar</button>
                         </div>
                     </form>
                 </div>
