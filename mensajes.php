@@ -35,7 +35,7 @@ setInterval(function(){ajax();},1000);
 
 
 </head>
-<body>
+<body onLoad= "ajax();">
 <div id= "container">
     <div id="box-chat">
         <div id="chat"> </div>
