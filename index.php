@@ -34,6 +34,8 @@ $resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_erro
 $resquery_ingrupo2 = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
 
 $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
+//consultar los amigos
+
 
 
 
@@ -102,22 +104,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         </div>
 
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="h5">
-                                <h5 class="text-primary">Tus amigos</h5>
-                            </div>
-                            <div clas="h5">
-                                <ul>
-                                    <li>
-                                        <a href="#" class="text-dark">
-                                            amigo
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <div class="card">
                         <div class="card-body">
@@ -133,6 +120,9 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
 
                                 <?php
+
+                                if(isset($inGrupo)){
+
                             do{
                             ?>
                                 <ul>
@@ -153,9 +143,69 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                 
                             } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
                            
-                           
+                        }else{
+                            
+                        
                                 ?>
 
+                                <div class="text-center text-danger h5">
+
+                                    upss!! aun no estas en un grupo
+
+                                </div>
+                                <?php
+
+                        }
+                                ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <?php
+                    //consultar grupos
+
+                    $query_grupos =("SELECT * FROM grupo LIMIT 10");
+                    $resquery_grupos = mysqli_query($connLocalhost, $query_grupos);
+                    $grupos = mysqli_fetch_assoc($resquery_grupos);
+
+
+                    ?>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="h5">
+                                <h5 class="text-primary">Algunos Grupos</h5>
+                            </div>
+                            <div clas="h5">
+                                <ul>
+
+                                <?php
+                                    do {
+                                ?>
+
+                                    <li>
+                                        <a href="grupo.php?idGrupo=<?php echo $grupos['idGrupo']; ?>" class="text-dark">
+                                            <?php
+                                                echo($grupos['nombre'])
+
+                                            ?>
+
+
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                    }while ($grupos =mysqli_fetch_assoc($resquery_grupos));
+                                    
+                                    ?>
+
+
+
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -178,9 +228,10 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                     <?php
 
-
+                    
                         //query para sacar las publicaciones de la base de datos
                             
+                    if(isset($idGrupos)){
 
 
                         $ids = implode(",",$idGrupos);
@@ -193,7 +244,8 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         grupo.nombre as 'grupo',
                         publicacion.titulo as 'titulo',
                         publicacion.contenido as 'contenido',
-                        publicacion.megustas as 'megustas'
+                        publicacion.megustas as 'megustas',
+                        publicacion.idPublicacion as 'idPublicacion'
                         from publicacion
                         LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
                         LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
@@ -217,7 +269,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                         <div class="h5 m-0">
 
                                             <a href="perfil.php?idUsuario=<?php echo $publicaciones['idUsuario']?>">
-                                               <span class="text-primary"> <?php echo($publicaciones['nombre'])?>
+                                                <span class="text-primary"> <?php echo($publicaciones['nombre'])?>
                                                 </span>
                                             </a>
                                         </div>
@@ -240,13 +292,60 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> 12 Like</a>
+
+                            <?php
+
+                                $query_megustas = sprintf("SELECT * FROM megustas where idUsuario =%d  AND idPublicacion =%d",
+                                mysqli_real_escape_string($connLocalhost,trim($userData['idUsuario'])),
+                                mysqli_real_escape_string($connLocalhost,trim($publicaciones['idPublicacion']))
+                                ) or trigger_error("El query de me gustas fallo");;
+
+                                $resquery_megustas = mysqli_query($connLocalhost,$query_megustas);
+                                
+                                $megustas = mysqli_fetch_assoc($resquery_megustas);
+                                
+                                if(mysqli_num_rows($resquery_megustas)){
+
+                                
+                            ?>
+
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> <?php echo($publicaciones['megustas']) ?> Ya no megusta</a>
+                            
+                            <?php
+                                }else{
+
+
+                                
+                            ?>
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> <?php echo($publicaciones['megustas']) ?> Me gusta</a>
+
+                            <?php
+                                }
+                            ?>
+
 
                             <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
                         </div>
                     </div>
-                    <hr style ="height:2px;border-width:0;color:gray;background-color:gray">
-                    <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones)); ?>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                    <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones));
+                    }else{
+
+                    ?>
+                    <div class="text-center text-danger h1">
+                        Registrate a un grupo primero
+                    </div>
+                    <div class="text-center">
+                        <img src="imagenes/nohay.jpg" alt="">
+                    </div>
+
+                    <?php
+                    }
+                    ?>
+
+
+
+
                     <!-- Post /////-->
                 </div>
                 <!-- barra lateral -->
