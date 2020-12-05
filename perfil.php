@@ -73,8 +73,7 @@
                                        ?>
                                         </p>
 
-                                        <button class="btn btn-primary">Agregar</button>
-                                        <button class="btn btn-outline-primary">Enviar Mensaje</button>
+
 
 
                                     </div>
@@ -149,21 +148,53 @@
 
                     </div>
 
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-                        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-                        crossorigin="anonymous">
-                    </script>
-                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                        crossorigin="anonymous">
-                    </script>
-                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                        crossorigin="anonymous">
-                    </script>
+
+
+
+
                 </div>
 
 
+                <div class="h1 bg-primary text-white text-center">
+                    Grupos
+                </div>
+
+
+                
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="ml-2">
+                                    <div class="h5 m-0">
+
+                                        <a href="grupo.php">nombre grupo
+                                        </a>
+                                    </div>
+                                    <div class="h7 text-black">descripcion</div>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+                    crossorigin="anonymous">
+                </script>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                    crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                    crossorigin="anonymous">
+                </script>
 </body>
 
 </html>

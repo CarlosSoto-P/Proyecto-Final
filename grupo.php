@@ -126,6 +126,7 @@ include("connections/conn_localhost.php");
                         Publicaciones
                     </div>
                     <hr>
+
                     <div class="card gedf-card">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -142,6 +143,7 @@ include("connections/conn_localhost.php");
                                     aria-labelledby="posts-tab">
                                     <div class="form-group">
                                         <label class="sr-only" for="message">post</label>
+                                        <input class="form-control" placeholder="Titulo" rows="3" type="text"></input>
                                         <textarea class="form-control" id="message" rows="3"
                                             placeholder="¿Cual es tu duda?"></textarea>
                                     </div>

@@ -21,21 +21,7 @@ function formatfecha($fecha){
    return date('g:i a',strtotime($fecha));
 }
 
-function megusta($idUsuario,$idPublicacion){
- $queryMegusta = "INSERT INTO megustas (idUsuario,idPublicacion) VALUES ($idUsuario,$idPublicacion)";
- $res_queryMegusta = mysqli_query($connLocalhost, $queryMegusta) or trigger_error("El query de dar me gusta");
-}
 
-function NOmegusta($idUsuario,$idPublicacion){
-  $queryNOmegusta = sprintf("delete from megustas where idUsuario = %d and idPublicacion =%d",
-  mysqli_real_escape_string($connLocalhost,$idUsuario),
-  mysqli_real_escape_string($connLocalhost,$idPublicacion));
-  $res_queryNOmegusta = mysqli_query($connLocalhost,$queryNOmegusta);
-}
-function prueba(){
-
-  echo("Esto es una prueba");
-}
 
 
 
