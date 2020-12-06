@@ -270,10 +270,10 @@ $resultados = mysqli_fetch_assoc($resquery_bucar);
                     ?>
 
                     <div class="text-center text-danger h1">
-                        aprende a escribir we
+                        Go me nasai no encontre lo que buscabas
                     </div>
                     <div class="text-center">
-                        <img src="imagenes/nohay.jpg" alt="">
+                        <img src="imagenes\Chica-Anime-Llorando-90671.gif" alt="">
                     </div>
 
                         <?php }?>
