@@ -1,3 +1,16 @@
+<?php
+
+
+if(isset($_POST['buscar_send'])){
+    $texto = $_POST['texto'];
+
+    header("Location:buscar.php?buscar=$texto");
+
+}
+
+?>
+
+
 <div class="sticky-top">
 
 
@@ -14,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
-                
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="mensajes.php">Chat</a>
@@ -28,9 +41,10 @@
 
 
 
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="¿Que buscas?" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0 text-white" type="submit">Buscar</button>
+            <form method='POST' class="form-inline">
+                <input name="texto" class="form-control mr-sm-2" type="search" placeholder="¿Que buscas?"
+                    aria-label="Search">
+                    <button name="buscar_send" type="registrar" class="btn btn-secondary">Buscar</button>
             </form>
 
 
@@ -40,5 +54,5 @@
 
         </div>
     </nav>
-    
+
 </div>
