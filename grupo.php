@@ -170,8 +170,9 @@ include("connections/conn_localhost.php");
                                     aria-labelledby="posts-tab">
                                     <div class="form-group">
                                         <label class="sr-only" for="message">post</label>
-                                        <input class="form-control" placeholder="Titulo" rows="3" type="text"></input>
-                                        <textarea class="form-control" id="message" rows="3"
+
+                                        <input class="form-control" name = 'title' placeholder="Titulo" rows="3" type="text"></input>
+                                        <textarea name = 'datosmsg'  class="form-control" id="message"  rows="3"
                                             placeholder="¿Cual es tu duda?"></textarea>
                                     </div>
 
@@ -182,7 +183,7 @@ include("connections/conn_localhost.php");
 
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary">Publicar</button>
+                                    <button name ='publicar' type="submit" class="btn btn-primary">Publicar</button>
                                 </div>
 
                             </div>
@@ -194,6 +195,31 @@ include("connections/conn_localhost.php");
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
+
+
+
+    $caja = "";
+ if (isset($_POST['publicar'])) {
+    $userid = $userData['idUsuario'];
+    $caja = $_POST['datosmsg'];
+  
+    
+if (empty($caja)) {
+
+}else{
+    $consulta = sprintf("INSERT INTO publicacion (idGrupo, idUsuario,contenido,titulo) VALUES ('%s','%s','%s','%s')",
+    mysqli_real_escape_string($connLocalhost, trim($grupo)),
+    mysqli_real_escape_string($connLocalhost, trim($usuario)),
+    mysqli_real_escape_string($connLocalhost, trim($_POST['datosmsg'])),
+    mysqli_real_escape_string($connLocalhost, trim($_POST['title']))
+   
+   
+);
+$resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
+
+    }   
+ }
+
 
                             for ($i=0; $i <100; $i++):
                             ?>
