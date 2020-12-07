@@ -1,7 +1,19 @@
 <?php
 include "connections/conn_localhost.php";
 
+// Inicializamos la sesion o la retomamos
+if(!isset($_SESSION)) {
+  session_start();
+}
+if(!isset($_SESSION['id'])) header('Location: login.php');
 
+$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
+);
+
+$resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+$userData= mysqli_fetch_assoc($resQueryUserData);
 
 
 ?>
@@ -15,6 +27,8 @@ include "connections/conn_localhost.php";
        
     <link rel="stylesheet" href="css/mssgstyle.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200&display=swap" rel="stylesheet">
 <script type="text/javascript">
@@ -36,6 +50,9 @@ setInterval(function(){ajax();},1000);
 
 </head>
 <body onLoad= "ajax();">
+
+<! -- cabecera -->
+        <?php include("includes/header.php"); ?>
 <div id= "container">
     <div id="box-chat">
         <div id="chat"> </div>
@@ -48,11 +65,17 @@ setInterval(function(){ajax();},1000);
     <input type="submit" name ="send" value = "Enviar">
     </form>
     <?php
+     $nombre ="";
+     $mensaje ="";
+    
     
     if (isset($_POST['send'])) {
+    
         $nombre = $_POST['nombre'];
         $mensaje = $_POST['mensaje'];
-
+if (empty($mensaje)) {
+  
+}else{
          $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
          mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
          mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
@@ -60,7 +83,9 @@ setInterval(function(){ajax();},1000);
         
      );
      $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
-    }
+
+        }   
+     }
     ?>
 </div>
     
