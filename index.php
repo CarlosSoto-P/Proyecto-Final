@@ -14,7 +14,7 @@
   $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
   
   $userData= mysqli_fetch_assoc($resQueryUserData);
-  
+  if($userData['rol']=='Asesor')  header('Location: indexAsesor.php');
 
   //consusltar grupos en los que este el usuario
 
@@ -274,7 +274,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                             </a>
                                         </div>
                                         <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
-                                        <a class="text-dark" href="#">><?php echo($publicaciones['grupo'])?></a>
+                                        <a class="text-dark" href="grupo.php?idGrupo=<?php echo $publicaciones['idGrupo']; ?>">><?php echo($publicaciones['grupo'])?></a>
                                     </div>
                                 </div>
                                 <div>

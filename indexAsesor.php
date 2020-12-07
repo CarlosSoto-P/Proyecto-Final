@@ -1,4 +1,4 @@
-?php
+<?php
   include("connections/conn_localhost.php");
 
   // Inicializamos la sesion o la retomamos
@@ -6,6 +6,7 @@
     session_start();
   }
   if(!isset($_SESSION['id'])) header('Location: login.php');
+  
 
   $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
   mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
@@ -15,9 +16,31 @@
   
   $userData= mysqli_fetch_assoc($resQueryUserData);
   
-  // Incluimos la conexión a la base de datos
+  if($userData['rol']=='Estudiante')  header('Location: index.php');
 
-    
+  //consusltar grupos que creo el asesor
+
+  $query_ingrupo = sprintf("SELECT
+  grupo.idGrupo AS 'idGrupo',
+  grupo.nombre AS 'nombreGrupo'
+  FROM miembros 
+  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
+  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
+  WHERE miembros.idUsuario = %d",
+mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
+);
+
+$resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+
+$resquery_ingrupo2 = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+$inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
+//consultar los amigos
+
+
+
+
 
 ?>
 
@@ -30,27 +53,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript" src="js/likes.js"></script>
+
+
+
     <title>Let's Teach</title>
+
+
 </head>
 
 <body>
 
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+
+
 
 
     <! -- cabecera -->
@@ -84,77 +107,77 @@
 
                     </div>
 
+
                     <div class="card">
                         <div class="card-body">
                             <div class="h5">
-                                <h5 class="text-primary">Grupos</h5>
+                                <h5 class="text-primary">Administra tus grupos</h5>
 
 
 
                             </div>
                             <div clas="h5">
+
+
+
+
                                 <?php
-                            for ($i=0; $i <15; $i++):
-                            
+
+                                if(isset($inGrupo)){
+
+                            do{
                             ?>
                                 <ul>
                                     <li>
-                                        <a href="#" class="text-dark">Nombre</a>
+                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>"
+                                            class="text-dark">
+
+                                            <?php 
+                                        echo($inGrupo['nombreGrupo']);
+                                        ?>
+                                        </a>
                                     </li>
                                 </ul>
-                                <?php endfor ?>
+
+                                <?php 
+                                //lleno por cada fecth el id de los grupos
+                                $idGrupos []= $inGrupo['idGrupo']; 
+                                
+                            } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
+                           
+                        }else{
+                            
+                        
+                                ?>
+
+                                <div class="text-center text-danger h5">
+
+                                    upss!! aun no creas un grupo
+
+                                </div>
+                                <?php
+
+                        }
+                                ?>
+
 
                             </div>
-
                         </div>
-
                     </div>
+
+
+
+
                 </div>
 
 
 
                 <div class="col-md-6 gedf-main">
 
-                    <!--- \\\\\\\Post
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                        aria-controls="posts" aria-selected="true">Hacer una publicación</a>
-                                </li>
 
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                    aria-labelledby="posts-tab">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="message">post</label>
-                                        <textarea class="form-control" id="message" rows="3"
-                                            placeholder="¿Que estas pensando?"></textarea>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="btn-toolbar justify-content-between">
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary">Publicar</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    -->
                     <hr>
                     <div class="text-center bg-info text-white h1">
-                        Publicaciones de tus Grupos
+                       Comenta las publicaciones
                     </div>
                     <hr>
 
@@ -162,7 +185,34 @@
 
                     <?php
 
-                            for ($i=0; $i <100; $i++):
+                    
+                        //query para sacar las publicaciones de la base de datos
+                            
+                    if(isset($idGrupos)){
+
+
+                        $ids = implode(",",$idGrupos);
+                        
+                        $query_publicaciones = ("SELECT 
+                        usuario.idUsuario as 'idUsuario',
+                        usuario.nombres as 'nombre',
+                        usuario.apellidos as 'apellido',
+                        grupo.idGrupo as 'idGrupo',
+                        grupo.nombre as 'grupo',
+                        publicacion.titulo as 'titulo',
+                        publicacion.contenido as 'contenido',
+                        publicacion.megustas as 'megustas',
+                        publicacion.idPublicacion as 'idPublicacion'
+                        from publicacion
+                        LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
+                        LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
+                        where publicacion.idGrupo  in ($ids)");
+
+                        $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
+                        $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
+                        
+
+                            do{
                             ?>
 
                     <div class="card gedf-card">
@@ -175,58 +225,117 @@
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">@LeeCross
-                                            <?php echo($i)?>
+                                            <a href="perfil.php?idUsuario=<?php echo $publicaciones['idUsuario']?>">
+                                                <span class="text-primary"> <?php echo($publicaciones['nombre'])?>
+                                                </span>
                                             </a>
                                         </div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                        <a class="text-muted" href="#">>En Grupo</a>
+                                        <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
+                                        <a class="text-dark" href="grupo.php?idGrupo=<?php echo $publicaciones['idGrupo']; ?>">><?php echo($publicaciones['grupo'])?></a>
                                     </div>
                                 </div>
                                 <div>
-                                    
+
                                 </div>
                             </div>
 
                         </div>
                         <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
 
-                            <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+                            <h5 class="text-info"><?php echo($publicaciones['titulo'])?></h5>
 
                             <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-                                eos
-                                ipsa praesentium esse magnam nemo dolor
-                                sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+                                <?php echo($publicaciones['contenido'])?>
                             </p>
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
 
+
+
+
+                        <div id="publicaciones" class="card-footer">
+
+
+
+                            <?php 
+                            $query_megusta = sprintf("SELECT * FROM megustas WHERE idUsuario =%d AND idPublicacion = %d",
+                            mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario'])),
+                            mysqli_real_escape_string($connLocalhost, trim($publicaciones['idPublicacion'])));
+
+                            $resquery_query_megusta = mysqli_query($connLocalhost,$query_megusta) or trigger_error(" la query de megustas fallo");
+                            
+                            
+                            if(mysqli_num_rows($resquery_query_megusta)==0){?>
+                              <span class="like text-info"
+                                id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                            </svg>
+                          
+                            <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
+                                    id="<?php echo $publicaciones['idPublicacion'] ?>">Me gusta</span></a>
+
+
+
+
+                            <?php } else {?>
+                                <span class="like text-info"
+                                id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                            </svg>
+                            
+                            <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
+                                    id="<?php echo $publicaciones['idPublicacion'] ?>">No me gusta</span></a>
+
+
+
+                            <?php } ?>
+
+
+
+                            <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
                         </div>
                     </div>
-                    <br>
-                    <hr>
-                    <br>
-                    <?php endfor; ?>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                    <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones));
+                    }else{
+
+                    ?>
+                    <div class="text-center text-danger h1">
+                       Aun no hay publicaciones
+                    </div>
+                    <div class="text-center">
+                        <img src="imagenes/nohay.jpg" alt="">
+                    </div>
+
+                    <?php
+                    }
+                    ?>
+
+
+
+
                     <!-- Post /////-->
                 </div>
                 <!-- barra lateral -->
-                <?php include("includes/barraLateral.php"); ?>
+                <?php include("includes/barraLateralAsesor.php"); ?>
 
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-        </script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
+
+
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
+        </script>
+
+
 </body>
 
 </html>
