@@ -17,13 +17,31 @@
   include("includes/common_functions.php");
 
   // Recuperamos los datos del usuario tomando la referencia de $_SESSION
-  $queryLoggedUserDetail = "SELECT * FROM usuario WHERE idUsuario = {$_GET['idUsuario']}";
+  $query_perfil = "SELECT * FROM usuario WHERE idUsuario = {$_GET['idUsuario']}";
 
   // Ejecutamos el query
-  $resQueryLoggedUserDetail = mysqli_query($connLocalhost, $queryLoggedUserDetail) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+  $resquery_perfil = mysqli_query($connLocalhost, $query_perfil) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
 
   // Hacemos un fetch del resultado obtenido
-  $loggedUserDetail = mysqli_fetch_assoc($resQueryLoggedUserDetail);
+  $perfil = mysqli_fetch_assoc($resquery_perfil);
+
+
+  //sacar los grupos donde esta el usuario.
+  $query_ingrupo = sprintf("SELECT
+  grupo.idGrupo AS 'idGrupo',
+  grupo.nombre AS 'nombreGrupo',
+  grupo.descripcion AS 'descripcionGrupo'
+  FROM miembros 
+  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
+  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
+  WHERE miembros.idUsuario = %d",
+mysqli_real_escape_string($connLocalhost, trim($_GET['idUsuario']))
+);
+
+$resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
+
+$inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
+
 
 
 ?>
@@ -64,12 +82,12 @@
                                     <div class="mt-3">
                                         <h4>
                                             <?php 
-                                       echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
+                                       echo($perfil['nombres']." ".$perfil['apellidos'])
                                        ?>
                                         </h4>
                                         <p class="text-secondary mb-1">
                                             <?php 
-                                       echo($loggedUserDetail['descripcion'])
+                                       echo($perfil['descripcion'])
                                        ?>
                                         </p>
 
@@ -94,7 +112,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php 
-                                       echo($loggedUserDetail['nombres']." ".$loggedUserDetail['apellidos'])
+                                       echo($perfil['nombres']." ".$perfil['apellidos'])
                                        ?>
                                     </div>
                                 </div>
@@ -105,7 +123,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php 
-                                       echo($loggedUserDetail['correo'])
+                                       echo($perfil['correo'])
                                        ?>
 
                                     </div>
@@ -117,7 +135,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php 
-                                       echo($loggedUserDetail['telefono'])
+                                       echo($perfil['telefono'])
                                        ?>
                                     </div>
                                 </div>
@@ -128,7 +146,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php 
-                                       echo($loggedUserDetail['rol'])
+                                       echo($perfil['rol'])
                                        ?>
                                     </div>
                                 </div>
@@ -139,7 +157,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?php 
-                                       echo($loggedUserDetail['descripcion'])
+                                       echo($perfil['descripcion'])
                                        ?>
                                     </div>
                                 </div>
@@ -156,11 +174,17 @@
 
 
                 <div class="h1 bg-primary text-white text-center">
-                    Grupos
+                    Esta unido a estos grupos
                 </div>
 
 
                 
+
+                <?php
+                
+                do{
+
+                ?>
                 <div class="card gedf-card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
@@ -168,10 +192,10 @@
                                 <div class="ml-2">
                                     <div class="h5 m-0">
 
-                                        <a href="grupo.php">nombre grupo
+                                        <a href="grupo.php"><?php echo $inGrupo['nombreGrupo']?>
                                         </a>
                                     </div>
-                                    <div class="h7 text-black">descripcion</div>
+                                    <div class="h7 text-black"> <?php echo $inGrupo['descripcionGrupo']?></div>
                                 </div>
                             </div>
                             <div>
@@ -179,6 +203,8 @@
                         </div>
                     </div>
                 </div>
+
+                <?php }while($inGrupo = mysqli_fetch_assoc($resquery_ingrupo))?>
                 
 
 
