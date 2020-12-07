@@ -8,13 +8,27 @@ if(!isset($_SESSION)) {
 }
 if(!isset($_SESSION['id'])) header('Location: login.php');
 
+// query para obtener la informacion del usuario 
 $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
-
 $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
-
 $userData= mysqli_fetch_assoc($resQueryUserData);
+
+//obtenemos los mienbros del grupo
+$query_miembros = "SELECT 
+usuario.nombres as 'nombreMiembro',
+usuario.idUsuario as 'idMiembro'
+from miembros
+left join usuario as usuario on usuario.idUsuario = miembros.idUsuario
+where miembros.idGrupo = {$_GET['idGrupo']}";
+$resQuery_Miembros = mysqli_query($connLocalhost, $query_miembros) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
+
+
+// Recuperamos los datos del grupo
+$query_grupo = "SELECT * FROM grupo WHERE idGrupo = {$_GET['idGrupo']}";
+$resQuery_Grupo = mysqli_query($connLocalhost, $query_grupo) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
+$grupoData= mysqli_fetch_assoc($resQuery_Grupo);
 
 // Incluimos la conexión a la base de datos
 include("connections/conn_localhost.php");
@@ -90,23 +104,36 @@ include("connections/conn_localhost.php");
                     <div class="card">
                         <div class="card-body">
                             <div class="h5">
-                                <h5 class="text-primary">Integrantes</h5>
+                                <h5 class="text-primary">Miembros</h5>
 
 
 
                             </div>
                             <div clas="h5">
-                                <?php
-                            for ($i=0; $i <15; $i++):
                             
-                            ?>
-                                <ul>
-                                    <li>
-                                        <a href="#" class="text-dark">Nombre</a>
-                                    </li>
-                                </ul>
-                                <?php endfor ?>
+                                
+                                <a href="#" class="text-dark">
+                                    <?php 
+                                        //while para mostrar todos los miembros 
+                                        while($miembroData= mysqli_fetch_array($resQuery_Miembros))
+                                        {?>
+                                            <ul>
+                                                <li>
+                                                    <?php echo($miembroData['nombreMiembro']);?>
+                                                </li>
+                                            
+                                            </ul>
 
+
+                                            
+                                        <?php } ?>
+                                                 
+                                             
+                                    
+                                </a>
+                                    
+                                
+                                
                             </div>
 
                         </div>
@@ -220,7 +247,39 @@ include("connections/conn_localhost.php");
                     <!-- Post /////-->
                 </div>
                 <!-- barra lateral -->
-                <?php include("includes/barraLateralGrupo.php"); ?>
+
+                <div class="col-md-3 float-right">
+                    <div class="card gedf-card">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <?php 
+                                    echo($grupoData['nombre']);
+                                ?>
+                            </h3>
+
+                            <h6>
+                                <?php
+                                    echo($grupoData['descripcion'])
+                                ?>
+                            </h6>
+
+                            <li>
+                            <a href="informacionGrupo.php"   class="card-link">Informacion del Grupo</a>
+
+                            </li>
+                            
+                            <li>
+                            <a href="#" class="card-link">Abandonar grupo</a>
+                            
+                            </li>
+                            
+                        
+                        
+                        </div>
+                    </div>
+                   
+                </div>
+                
 
             </div>
         </div>
