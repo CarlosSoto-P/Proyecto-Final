@@ -65,19 +65,19 @@ setInterval(function(){ajax();},1000);
     <input type="submit" name ="send" value = "Enviar">
     </form>
     <?php
-     $nombre ="";
+  
      $mensaje ="";
     
     
     if (isset($_POST['send'])) {
     
-        $nombre = $_POST['nombre'];
+        $nombre = $userData['nombres'];
         $mensaje = $_POST['mensaje'];
 if (empty($mensaje)) {
   
 }else{
          $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
-         mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
+         mysqli_real_escape_string($connLocalhost, trim($nombre)),
          mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
 
         
