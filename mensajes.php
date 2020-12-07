@@ -60,7 +60,7 @@ setInterval(function(){ajax();},1000);
     <form action="mensajes.php" method="post">
     
 
-    <input type="text" name = "nombre" placeholder = "Ingresa tu nombre">
+    <input type="text" name = "nombre" placeholder =<?php echo $userData['nombres'] ?> disabled>
     <textarea name="mensaje"placeholder = "Ingresa tu mensaje"></textarea>
     <input type="submit" name ="send" value = "Enviar">
     </form>
