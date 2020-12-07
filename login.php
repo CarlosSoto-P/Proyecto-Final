@@ -45,10 +45,12 @@ if(isset($_POST['login_sent'])) {
 	$_SESSION['rol'] = $userData['rol'];
 	$_SESSION['descripcion'] = $userData['descripcion'];
 
-    if($_SESSION['rol'] = Alumno){
+    if($_SESSION['rol'] == 'Estudiante'){
 
 	header('Location: index.php');
-}else{
+}elseif ($_SESSION['rol']=='Asesor') {
+    # code...
+}{
 	header('Location: indexAsesor.php');
 
 }

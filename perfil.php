@@ -192,7 +192,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                 <div class="ml-2">
                                     <div class="h5 m-0">
 
-                                        <a href="grupo.php"><?php echo $inGrupo['nombreGrupo']?>
+                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>"><?php echo $inGrupo['nombreGrupo']?>
                                         </a>
                                     </div>
                                     <div class="h7 text-black"> <?php echo $inGrupo['descripcionGrupo']?></div>
