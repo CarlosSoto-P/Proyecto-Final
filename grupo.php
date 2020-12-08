@@ -169,9 +169,10 @@ include("connections/conn_localhost.php");
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel"
                                     aria-labelledby="posts-tab">
                                     <div class="form-group">
+                             <form action="grupo.php" method="post">
                                         <label class="sr-only" for="message">post</label>
 
-                                        <input class="form-control" name = 'title' placeholder="Titulo" rows="3" type="text"></input>
+                                        <input  class="form-control publicar" id ='publicar' name = 'title' placeholder="Titulo" rows="3" type="text"></input>
                                         <textarea name = 'datosmsg'  class="form-control" id="message"  rows="3"
                                             placeholder="¿Cual es tu duda?"></textarea>
                                     </div>
@@ -183,7 +184,7 @@ include("connections/conn_localhost.php");
 
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
-                                    <button name ='publicar' type="submit" class="btn btn-primary">Publicar</button>
+                                    <a  href = "grupo.php?idGrupo=<?php echo $grupoData['idGrupo']?>" class="btn btn-primary">Publicar</a>
                                 </div>
 
                             </div>
@@ -195,21 +196,15 @@ include("connections/conn_localhost.php");
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
+ 
 
+ if (isset($_POST['datosmsg']) && $_POST['title']) {
+    $caja =  $_POST['datosmsg'];
+    echo $caja;
 
-
-    $caja = "";
- if (isset($_POST['publicar'])) {
-    $userid = $userData['idUsuario'];
-    $caja = $_POST['datosmsg'];
-  
-    
-if (empty($caja)) {
-
-}else{
     $consulta = sprintf("INSERT INTO publicacion (idGrupo, idUsuario,contenido,titulo) VALUES ('%s','%s','%s','%s')",
-    mysqli_real_escape_string($connLocalhost, trim($grupo)),
-    mysqli_real_escape_string($connLocalhost, trim($usuario)),
+    mysqli_real_escape_string($connLocalhost, trim( $grupoData['idGrupo'])),
+    mysqli_real_escape_string($connLocalhost, trim( $userData['idUsuario'])),
     mysqli_real_escape_string($connLocalhost, trim($_POST['datosmsg'])),
     mysqli_real_escape_string($connLocalhost, trim($_POST['title']))
    
@@ -217,7 +212,7 @@ if (empty($caja)) {
 );
 $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
 
-    }   
+    
  }
 
 
