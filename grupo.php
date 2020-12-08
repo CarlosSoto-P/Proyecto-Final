@@ -246,6 +246,8 @@ include("connections/conn_localhost.php");
                     <?php endfor; ?>
                     <!-- Post /////-->
                 </div>
+
+
                 <!-- barra lateral -->
 
                 <div class="col-md-3 float-right">
@@ -264,7 +266,7 @@ include("connections/conn_localhost.php");
                             </h6>
 
                             <li>
-                            <a href="informacionGrupo.php"   class="card-link">Informacion del Grupo</a>
+                            <a href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"   class="card-link">Informacion del Grupo</a>
 
                             </li>
                             

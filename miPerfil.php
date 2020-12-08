@@ -48,7 +48,7 @@
         <?php include("includes/barraLateral.php"); ?>
 
         <hr>
-
+ 
         <div class="container">
             <div class="main-body">
 
@@ -77,9 +77,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
 
                     <div class="col-md-8">
