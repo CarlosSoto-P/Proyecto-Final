@@ -5,20 +5,20 @@
 
 
 
-                <li>
-                    <a href="editarPerfil.php" class="card-link">Editar perfil</a>
-                </li>
-
-                <li>
-                    <a href="includes/cerrar_sesion.php" class="card-link">Cerrar sesión</a>
-
-                </li>
-                <li>
-                    <a href="includes/cerrar_sesion.php" class="card-link">Crear un grupo</a>
-
-                </li>
+            <li>
+                <a href="editarPerfil.php" class="card-link">Editar perfil</a>
+            </li>
 
 
+            <li>
+                <a href="CrearGrupo.php" class="card-link">Crear un grupo</a>
+
+            </li>
+
+            <li>
+                <a href="includes/cerrar_sesion.php" class="card-link">Cerrar sesión</a>
+
+            </li>
 
 
 

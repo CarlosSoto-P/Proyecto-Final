@@ -20,24 +20,10 @@
 
   //consusltar grupos que creo el asesor
 
-  $query_ingrupo = sprintf("SELECT
-  grupo.idGrupo AS 'idGrupo',
-  grupo.nombre AS 'nombreGrupo'
-  FROM miembros 
-  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
-  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
-  WHERE miembros.idUsuario = %d",
-mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
-);
-
-$resquery_ingrupo = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
-
-
-$resquery_ingrupo2 = mysqli_query($connLocalhost, $query_ingrupo) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
-
-$inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
-//consultar los amigos
-
+  $query_grupos_creados = sprintf("SELECT * FROM grupo WHERE idAsesor = %s",
+    mysqli_real_escape_string($connLocalhost,$userData['idUsuario']));
+  $res_gruposCreados = mysqli_query($connLocalhost,$query_grupos_creados);
+  $gruposCreados = mysqli_fetch_assoc($res_gruposCreados);
 
 
 
@@ -111,7 +97,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                     <div class="card">
                         <div class="card-body">
                             <div class="h5">
-                                <h5 class="text-primary">Administra tus grupos</h5>
+                                <h5 class="text-primary">Grupos creados</h5>
 
 
 
@@ -123,17 +109,17 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                                 <?php
 
-                                if(isset($inGrupo)){
+                                if(isset($gruposCreados)){
 
                             do{
                             ?>
                                 <ul>
                                     <li>
-                                        <a href="grupo.php?idGrupo=<?php echo $inGrupo['idGrupo']; ?>"
+                                        <a href="grupo.php?idGrupo=<?php echo $gruposCreados['idGrupo']; ?>"
                                             class="text-dark">
 
                                             <?php 
-                                        echo($inGrupo['nombreGrupo']);
+                                        echo($gruposCreados['nombre']);
                                         ?>
                                         </a>
                                     </li>
@@ -141,9 +127,9 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                                 <?php 
                                 //lleno por cada fecth el id de los grupos
-                                $idGrupos []= $inGrupo['idGrupo']; 
+                                $idGrupos []= $gruposCreados['idGrupo']; 
                                 
-                            } while ($inGrupo = mysqli_fetch_assoc($resquery_ingrupo));
+                            } while ($gruposCreados = mysqli_fetch_assoc($res_gruposCreados));
                            
                         }else{
                             
@@ -177,7 +163,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                     <hr>
                     <div class="text-center bg-info text-white h1">
-                       Comenta las publicaciones
+                        Comenta las publicaciones
                     </div>
                     <hr>
 
@@ -186,7 +172,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                     <?php
 
                     
-                        //query para sacar las publicaciones de la base de datos
+                        //query para sacar las publicaciones de los grupos que creo el asesor
                             
                     if(isset($idGrupos)){
 
@@ -231,7 +217,8 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                                             </a>
                                         </div>
                                         <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
-                                        <a class="text-dark" href="grupo.php?idGrupo=<?php echo $publicaciones['idGrupo']; ?>">><?php echo($publicaciones['grupo'])?></a>
+                                        <a class="text-dark"
+                                            href="grupo.php?idGrupo=<?php echo $publicaciones['idGrupo']; ?>">><?php echo($publicaciones['grupo'])?></a>
                                     </div>
                                 </div>
                                 <div>
@@ -265,14 +252,14 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                             
                             
                             if(mysqli_num_rows($resquery_query_megusta)==0){?>
-                              <span class="like text-info"
+                            <span class="like text-info"
                                 id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                             </svg>
-                          
+
                             <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
                                     id="<?php echo $publicaciones['idPublicacion'] ?>">Me gusta</span></a>
 
@@ -280,14 +267,14 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
 
                             <?php } else {?>
-                                <span class="like text-info"
+                            <span class="like text-info"
                                 id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                             </svg>
-                            
+
                             <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
                                     id="<?php echo $publicaciones['idPublicacion'] ?>">No me gusta</span></a>
 
@@ -297,7 +284,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
 
 
-                            <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
+                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -306,7 +293,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                     ?>
                     <div class="text-center text-danger h1">
-                       Aun no hay publicaciones
+                        Aun no hay publicaciones
                     </div>
                     <div class="text-center">
                         <img src="imagenes/nohay.jpg" alt="">

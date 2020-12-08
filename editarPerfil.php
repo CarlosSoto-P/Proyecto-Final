@@ -208,6 +208,7 @@ if($_POST['contraseña'] != $_POST['contraseña2']){
         if(isset($error)) printMsg($error, "error"); 
             ?>
                 </div>
+                
             </div>
             <div>
 

@@ -6,8 +6,7 @@
     <title>Chat</title>
 </head>
 <body>
-<?php
-?>
+
  <?php
  
  include("connections/conn_localhost.php");
