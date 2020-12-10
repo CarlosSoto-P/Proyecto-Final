@@ -72,32 +72,42 @@ include("connections/conn_localhost.php");
                     <div class="col-md-3">
 
 
+
+
+
                         <section>
-                            <div class="card">
-
-                                <div class="card-body">
-                                    <div class="h5">
-                                        <a href="miPerfil.php">
-                                            <?php 
-                                echo($userData['nombres'])
-                                ?>
-                                        </a>
-
-                                    </div>
-                                    <div class="h7">
-
-
-                                        <?php 
-                            echo($userData['descripcion'])
-                            ?>
-                                    </div>
-                                </div>
-
-                            </div>
+                            
                         </section>
 
 
                         <section>
+                        <!-- barra lateral -->
+
+                        <div class="card">
+<h3 class="card-title">
+                <?php 
+                        echo($grupoData['nombre']);
+                    ?>
+            </h3>
+
+            <h6>
+                <?php
+                        echo($grupoData['descripcion'])
+                    ?>
+            </h6>
+
+            <li>
+                <a href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
+                    class="card-link">Informacion del Grupo</a>
+
+            </li>
+
+            <li>
+                <a href="#" class="card-link">Abandonar grupo</a>
+
+            </li>
+            </div>
+            <!-- -->
 
                             <div class="card">
                                 <div class="card-body">
@@ -107,6 +117,7 @@ include("connections/conn_localhost.php");
 
 
                                     </div>
+                                    
                                     <div clas="h5">
 
 
@@ -257,7 +268,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                         from publicacion
                         LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
                         LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
-                        where publicacion.idGrupo  in ($ids)");
+                         where publicacion.idGrupo  in ($ids) ORDER BY idPublicacion DESC");
 
                         $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
                         $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
@@ -390,41 +401,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
             </div>
 
-            <!-- barra lateral -->
-            </div>
-
-            <div class="col-md-3 float-right">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <?php 
-                                    echo($grupoData['nombre']);
-                                ?>
-                        </h3>
-
-                        <h6>
-                            <?php
-                                    echo($grupoData['descripcion'])
-                                ?>
-                        </h6>
-
-                        <li>
-                            <a href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
-                                class="card-link">Informacion del Grupo</a>
-
-                        </li>
-
-                        <li>
-                            <a href="#" class="card-link">Abandonar grupo</a>
-
-                        </li>
-
-
-
-                    </div>
-                </div>
-
-            </div>
+            
 
 
             </div>
