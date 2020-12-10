@@ -36,7 +36,7 @@ if(isset($_POST['crear_send'])) {
           mysqli_real_escape_string($connLocalhost,trim($_POST['descripcionGrupo'])));
           $res_queryCrearGrupo = mysqli_query($connLocalhost,$query_crearGrupo) or trigger_error("La query de crear grupo fallo");
         
-         header ('Location: index.php');
+         header ('Location: indexAsesor.php');
       }
 
       

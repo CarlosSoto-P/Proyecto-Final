@@ -338,6 +338,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                             <?php } ?>
 
+                            <a href="responder.php?idPublicacion=<?php echo $publicaciones['idPublicacion'] ?>" class="card-link"><i class="fa fa-comment"></i>Ver solución</a>
 
 
                             <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->

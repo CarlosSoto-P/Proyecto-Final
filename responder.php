@@ -104,7 +104,8 @@
 
     <! -- cabecera -->
         <?php include("includes/header.php"); ?>
-        <?php include("includes/barraLateralAsesor.php"); ?>
+
+        <?php include("includes/barraLateral.php"); ?>
 
 
         <div class="col-md-9 gedf-main">
@@ -201,6 +202,11 @@ if(isset($error)) printMsg($error, "error");
 
                 </div>
             </div>
+
+            <?php if($userData['rol']=='Asesor'){
+                
+                
+                ?>
             <div class="text-center bg-info text-white h1">
                 Responder
             </div>
@@ -217,12 +223,19 @@ if(isset($error)) printMsg($error, "error");
                 </div>
 
             </form>
+
+            <?php }?>
+
+
+
             <div class="text-center bg-info text-white h1">
                 Respuestas
             </div>
 
 
             <?php
+            if(isset($comentarios)){
+
                     do{
               ?>
             <div class="card gedf-card">
@@ -245,8 +258,15 @@ if(isset($error)) printMsg($error, "error");
             </div>
             <?php
                     }while( $comentarios = mysqli_fetch_assoc($res_comentarios));
+                }else{
+                    
+                
                   ?>
+            <div class="text-center text-danger h1">
+                Aun no hay respuestas
+            </div>
 
+            <?php }?>
 
 
             <!-- Post /////-->
