@@ -38,7 +38,6 @@ include("connections/conn_localhost.php");
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -165,20 +164,17 @@ include("connections/conn_localhost.php");
                         </div>
                         <div class="card-body">
                             <div class="tab-content" id="myTabContent">
-                           <!-- Redordatorio no poner action.-->
-                            <form  method="post">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                
                                     aria-labelledby="posts-tab">
                                     <div class="form-group">
-                                   
+                             <form  method="post">
                                         <label class="sr-only" for="message">post</label>
-                                       
-                                        <input  class="form-control publicar" id = 'title' name = 'title' placeholder="Titulo" rows="3" type="text"></input>
-                                        <textarea name = 'datosmsg'  class="form-control" id="datosmsg"  rows="3"
+
+                                        <input  class="form-control publicar" id ='publicar' name = 'title' placeholder="Titulo" rows="3" type="text"></input>
+                                        <textarea name = 'datosmsg'  class="form-control" id="message"  rows="3"
                                             placeholder="¿Cual es tu duda?"></textarea>
                                     </div>
-                               
+
                                 </div>
 
                             </div>
@@ -186,12 +182,8 @@ include("connections/conn_localhost.php");
 
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
-                                
-                                   <button  id="publicar" name="publicar">Publicar</button>
-                                
-                                   
-                                </div>
-                                </form>
+                                <button  id="btnPublicar" name="btnPublicar">Publicar</button>
+                                     </div>
 
                             </div>
                         </div>
@@ -202,13 +194,16 @@ include("connections/conn_localhost.php");
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
+ 
+ $grupoID = "";
+ $usuarioId = "";
+ $boxText = "";
+ $boxTitle = "";
+ 
+ if (isset($_POST['btnPublicar'])){
+ 
 
-    $grupoID = "";
-    $usuarioId = "";
-    $boxText = "";
-    $boxTitle = "";
-
-    if (isset($_POST['publicar'])) {
+  
     $grupoID = $grupoData['idGrupo'];
     $usuarioId = $userData['idUsuario'];
     $boxText = $_POST['datosmsg'];
@@ -225,16 +220,49 @@ include("connections/conn_localhost.php");
 );
 $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
 
+    
  }
- 
-
-
-
 
 
                             for ($i=0; $i <100; $i++):
                             ?>
 
+                   
+                    <!--- \\\\\\\publicaciones-->
+
+                    <?php
+
+                    
+                        //query para sacar las publicaciones de la base de datos
+                            
+                    if(1>0){
+
+
+                        $ids = $grupoData['idGrupos'];
+                        
+                        $query_publicaciones = ("SELECT 
+                        usuario.idUsuario as 'idUsuario',
+                        usuario.nombres as 'nombre',
+                        usuario.apellidos as 'apellido',
+                        grupo.idGrupo as 'idGrupo',
+                        grupo.nombre as 'grupo',
+                        publicacion.titulo as 'titulo',
+                        publicacion.contenido as 'contenido',
+                        publicacion.megustas as 'megustas',
+                        publicacion.idPublicacion as 'idPublicacion'
+                        from publicacion
+                        LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
+                        LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
+                        where publicacion.idGrupo  in ($ids)");
+
+                        $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
+                        $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
+                        
+
+                            do{
+                            ?>
+
+                                         
                     <div class="card gedf-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
@@ -245,12 +273,97 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                                     <div class="ml-2">
                                         <div class="h5 m-0">
 
-                                            <a href="perfil.php">@nombreUsuarioMiembro
-                                            <?php echo($i)?>
+                                            <a href="perfil.php?idUsuario=<?php echo $publicaciones['idUsuario']?>">
+                                                <span class="text-primary"> <?php echo($publicaciones['nombre'])?>
+                                                </span>
                                             </a>
                                         </div>
-                                        <div class="h7 text-muted">nombreCompletoMiembro</div>
-                                        <a class="text-muted" href="#">>nombreGrupo</a>
+                                        <div class="h7 text-muted"><?php echo($publicaciones['apellido'])?></div>
+                                        <a class="text-dark" href="grupo.php?idGrupo=<?php echo $publicaciones['idGrupo']; ?>">><?php echo($publicaciones['grupo'])?></a>
+                                    </div>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+
+                            <h5 class="text-info"><?php echo($publicaciones['titulo'])?></h5>
+
+                            <p class="card-text">
+                                <?php echo($publicaciones['contenido'])?>
+                            </p>
+                        </div>
+
+
+
+
+                        <div id="publicaciones" class="card-footer">
+
+
+
+                            <?php 
+                            $query_megusta = sprintf("SELECT * FROM megustas WHERE idUsuario =%d AND idPublicacion = %d",
+                            mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario'])),
+                            mysqli_real_escape_string($connLocalhost, trim($publicaciones['idPublicacion'])));
+
+                            $resquery_query_megusta = mysqli_query($connLocalhost,$query_megusta) or trigger_error(" la query de megustas fallo");
+                            
+                            
+                            if(mysqli_num_rows($resquery_query_megusta)==0){?>
+                              <span class="like text-info"
+                                id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                            </svg>
+                          
+                            <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
+                                    id="<?php echo $publicaciones['idPublicacion'] ?>">Me gusta</span></a>
+
+
+
+
+                            <?php } else {?>
+                                <span class="like text-info"
+                                id="cantidad_<?php echo $publicaciones['idPublicacion'] ?>"><?php echo $publicaciones['megustas']?></span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                            </svg>
+                            
+                            <a style="cursor:pointer" class="card-link"><i class="fa fa-gittip"></i><span class="like"
+                                    id="<?php echo $publicaciones['idPublicacion'] ?>">No me gusta</span></a>
+
+
+
+                            <?php } ?>
+
+
+
+                            <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
+                        </div>
+                    </div>
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                    <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones));
+                    }else{
+
+                    ?>
+                    <div class="text-center text-danger h1">
+                        Registrate a un grupo primero
+                    </div>
+                    <div class="text-center">
+                        <img src="imagenes/nohay.jpg" alt="">
+                    </div>
+
+                    <?php
+                    }
+                    ?>
+
                                     </div>
                                 </div>
                                 <div>
@@ -259,24 +372,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                             </div>
 
                         </div>
-                        <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-
-                            <h5 class="text-primary">Lorem ipsum dolor sit amet, consectetur adip.</h5>
-
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-                                eos
-                                ipsa praesentium esse magnam nemo dolor
-                                sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <!--<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a> -->
-
-                        </div>
-                    </div>
+                        
                     <br>
                     <hr>
                     <br>
