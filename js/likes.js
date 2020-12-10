@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
     $(".like").click(function () {
         var id = this.id;
 
@@ -17,11 +20,14 @@ $(document).ready(function () {
 
             }
 
+
         });
 
         
 
     });
+ 
+
 
 
 

@@ -112,14 +112,13 @@ include("connections/conn_localhost.php");
                             <div clas="h5">
                             
                                 
-                                <a href="#" class="text-dark">
                                     <?php 
                                         //while para mostrar todos los miembros 
                                         while($miembroData= mysqli_fetch_array($resQuery_Miembros))
                                         {?>
                                             <ul>
                                                 <li>
-                                                    <?php echo($miembroData['nombreMiembro']);?>
+                                                   <a href="perfil.php?idUsuario=<?php echo $miembroData['idMiembro']?>" class="text-dark"><?php echo($miembroData['nombreMiembro']);?></a> 
                                                 </li>
                                             
                                             </ul>
@@ -130,7 +129,6 @@ include("connections/conn_localhost.php");
                                                  
                                              
                                     
-                                </a>
                                     
                                 
                                 

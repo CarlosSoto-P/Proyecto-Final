@@ -163,7 +163,7 @@
 
                     <hr>
                     <div class="text-center bg-info text-white h1">
-                        Comenta las publicaciones
+                       Responde dudas
                     </div>
                     <hr>
 
@@ -284,7 +284,7 @@
 
 
 
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentar</a>
+                            <a href="responder.php?idPublicacion=<?php echo $publicaciones['idPublicacion'] ?>" class="card-link"><i class="fa fa-comment"></i> Responder</a>
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
