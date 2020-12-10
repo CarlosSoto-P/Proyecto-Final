@@ -38,22 +38,26 @@ include("connections/conn_localhost.php");
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-
-<script type="text/javascript" src="js/likes.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <script type="text/javascript" src="js/likes.js"></script>
     <title>Grupo</title>
 </head>
 <body>
 
-   
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
 
     <main>
 
@@ -107,7 +111,6 @@ include("connections/conn_localhost.php");
                             </div>
                             <div clas="h5">
                             
-                            
                                 
                                     <?php 
                                         //while para mostrar todos los miembros 
@@ -137,7 +140,6 @@ include("connections/conn_localhost.php");
 
                 </section>
                 </div>
-
 
 
                 <div class="col-md-6 gedf-main">
@@ -195,7 +197,6 @@ include("connections/conn_localhost.php");
 
 
                     </div>
-                    
 
                     <!--- \\\\\\\publicaciones-->
 
@@ -205,7 +206,7 @@ include("connections/conn_localhost.php");
  $usuarioId = "";
  $boxText = "";
  $boxTitle = "";
-
+ 
  if (isset($_POST['btnPublicar'])){
  
 
@@ -222,7 +223,7 @@ include("connections/conn_localhost.php");
     $mg = 0;
     $consulta = sprintf("INSERT INTO publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
     mysqli_real_escape_string($connLocalhost, trim($grupoID)),
-    mysqli_real_escape_string($connLocalhost, trim($usuarioId)),
+    mysqli_real_escape_string($connLocalhost, trim($grupoID)),
     mysqli_real_escape_string($connLocalhost, trim($boxText)),
     mysqli_real_escape_string($connLocalhost, trim($boxTitle)),
     mysqli_real_escape_string($connLocalhost, trim($mg))
@@ -235,7 +236,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
  
 
 
-                          
+                            for ($i=0; $i <100; $i++):
                             ?>
 
                    
@@ -245,7 +246,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
 
 
-                        $ids = $grupoData['idGrupo'];
+                        $ids = $grupoData['idGrupos'];
                         
                         $query_publicaciones = ("SELECT 
                         usuario.idUsuario as 'idUsuario',
@@ -326,7 +327,6 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                     <?php
                     }
                     ?>
-                    
 
                                     </div>
                                 </div>
@@ -340,15 +340,14 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                     <br>
                     <hr>
                     <br>
-                
+                    <?php endfor; ?>
                     <!-- Post /////-->
-                    
                 </div>
 
- <!-- barra lateral -->
-</div>
 
-            <div class="col-md-3 float-right">
+                <!-- barra lateral -->
+
+                <div class="col-md-3 float-right">
                     <div class="card gedf-card">
                         <div class="card-body">
                             <h3 class="card-title">
@@ -379,15 +378,18 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                     </div>
                    
                 </div>
-               
+                
 
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
-            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
         </script>
 
 
