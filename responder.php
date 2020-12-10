@@ -1,5 +1,7 @@
 <?php 
   include("connections/conn_localhost.php");
+  include("includes/common_functions.php");
+
   if(!isset($_SESSION)) {
     session_start();
   }
@@ -33,11 +35,45 @@
   $publicacion= mysqli_fetch_assoc($resquery_publicaciones);
 
 //insertar comentario
-  if(isset($_POST['boton_send'])){
+  if(isset($_POST['responder_send'])){
 
-     
+    foreach($_POST as $calzon => $caca) {
+        if($caca == '' && $calzon != "telefono") $error[] = "La caja $calzon es requerida";
+      }
+
+
+      if(!isset($error)){
+
+
+     $query_comentar = sprintf("INSERT INTO comentario (idUsuario, idPublicacion,contenido) VALUES ('%s','%s','%s')",
+     mysqli_real_escape_string($connLocalhost,trim($userData['idUsuario'])),
+     mysqli_real_escape_string($connLocalhost,trim($publicacion['idPublicacion'])),
+     mysqli_real_escape_string($connLocalhost,trim($_POST['solucion'])));
+
+     $res_insertComentar = mysqli_query($connLocalhost,$query_comentar) or trigger_error("fallo");
+    }
+
+
+
+
   }
-  
+
+
+  //query buscar comentarios de la publicacion
+  $idPublicacion = $publicacion['idPublicacion'];
+  $query_comentarios =("SELECT 
+
+  comentario.contenido AS 'contenido',
+  usuario.nombres AS 'nombres',
+  usuario.idUsuario AS 'idUsuario'
+  FROM comentario
+  LEFT JOIN usuario AS usuario ON usuario.idUsuario = comentario.idUsuario
+  WHERE comentario.idPublicacion = $idPublicacion");
+  $res_comentarios = mysqli_query($connLocalhost,$query_comentarios);
+
+
+  $comentarios = mysqli_fetch_assoc($res_comentarios);
+
   ?>
 
 
@@ -64,6 +100,8 @@
 <body>
 
 
+
+
     <! -- cabecera -->
         <?php include("includes/header.php"); ?>
         <?php include("includes/barraLateralAsesor.php"); ?>
@@ -71,7 +109,13 @@
 
         <div class="col-md-9 gedf-main">
 
+            <div class="bg-danger">
 
+                <?php 
+if(isset($error)) printMsg($error, "error"); 
+?>
+
+            </div>
 
 
             <div class="card gedf-card">
@@ -157,28 +201,56 @@
 
                 </div>
             </div>
-
-
-
-
-            <!-- Post /////-->
             <div class="text-center bg-info text-white h1">
-                Solución
+                Responder
             </div>
 
-            <form id="insertarComentario" method="POST">
+            <form method="POST">
 
                 <div class="form-group">
-                    <input id="idPublicacion" name="idPublicacion" type="hidden" value="<?php echo $publicacion['idPublicacion']?>">
-                    <textarea class="form-control" id="solucion" name="solucion" rows="3"></textarea>
-                   
-                    <button  id="btnResponder" class="btn btn-info" name="boton_send">Responder</button>
 
+                    <textarea class="form-control" id="solucion" name="solucion" rows="3"></textarea>
+
+                    <input class="btn btn-info" type="submit" value="Comentar" name="responder_send">
 
 
                 </div>
 
             </form>
+            <div class="text-center bg-info text-white h1">
+                Respuestas
+            </div>
+
+
+            <?php
+                    do{
+              ?>
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="ml-2">
+                                <div class="h5 m-0">
+
+                                    <a href="perfil.php?idUsuario=<?php echo $comentarios['idUsuario']?>"><?php echo $comentarios['nombres']?>
+                                    </a>
+                                </div>
+                                <div class="h7 text-black"> <?php echo $comentarios['contenido']?></div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+                    }while( $comentarios = mysqli_fetch_assoc($res_comentarios));
+                  ?>
+
+
+
+            <!-- Post /////-->
+
 
 
 
