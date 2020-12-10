@@ -384,8 +384,8 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                         <ul>
                             <h3 class="card-title">
                                 <?php 
-                echo($grupoData['nombre']);
-            ?>
+                                     echo($grupoData['nombre']);
+                                ?>
                             </h3>
 
                         </ul>
@@ -395,20 +395,20 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                             <h6>
                                 <?php
-                echo($grupoData['descripcion'])
-            ?>
+                                    echo($grupoData['descripcion'])
+                                ?>
                             </h6>
                         </ul>
                         <ul>
 
                             <li>
                                 <a href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
-                                    class="card-link">Informacion del Grupo</a>
+                                    class="card-link">Editar Usuario</a>
 
                             </li>
 
                             <li>
-                                <a href="#" class="card-link">Abandonar grupo</a>
+                                <a href="#" class="card-link">Cerrar Sesión</a>
 
                             </li>
 
