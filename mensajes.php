@@ -17,6 +17,7 @@ $userData= mysqli_fetch_assoc($resQueryUserData);
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,8 @@ $userData= mysqli_fetch_assoc($resQueryUserData);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
     
-       
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="css/mssgstyle.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -49,21 +51,26 @@ setInterval(function(){ajax();},1000);
 
 
 </head>
+
 <body onLoad= "ajax();">
+
 
 <! -- cabecera -->
         <?php include("includes/header.php"); ?>
+      
 <div id= "container">
     <div id="box-chat">
         <div id="chat"> </div>
     </div>
+
     <form action="mensajes.php" method="post">
     
 
     <input type="text" name = "nombre" placeholder =<?php echo $userData['nombres'] ?> disabled>
     <textarea name="mensaje"placeholder = "Ingresa tu mensaje"></textarea>
-    <input type="submit" name ="send" value = "Enviar">
+    <input class = 'pulse' type="submit" name ="send" value = "Enviar">
     </form>
+    <a href="http://localhost/GitHub/Proyecto-Final/login.php">Ya tienes una cuenta</a>
     <?php
   
      $mensaje ="";
@@ -73,21 +80,22 @@ setInterval(function(){ajax();},1000);
     
         $nombre = $userData['nombres'];
         $mensaje = $_POST['mensaje'];
-if (empty($mensaje)) {
-  
-}else{
-         $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
-         mysqli_real_escape_string($connLocalhost, trim($nombre)),
-         mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
+if (!empty($mensaje)) {
+    $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
+    mysqli_real_escape_string($connLocalhost, trim($nombre)),
+    mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
 
-        
-     );
-     $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
+   
+);
+$resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
 
-        }   
+    
+}
+    
      }
     ?>
 </div>
-    
+
+
 </body>
 </html>
