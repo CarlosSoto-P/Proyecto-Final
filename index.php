@@ -15,6 +15,7 @@
   
   $userData= mysqli_fetch_assoc($resQueryUserData);
   if($userData['rol']=='Asesor')  header('Location: indexAsesor.php');
+  if($userData['rol']=='Admin')  header('Location: indexAdmin.php');
 
   //consusltar grupos en los que este el usuario
 

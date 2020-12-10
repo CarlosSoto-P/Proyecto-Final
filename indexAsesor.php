@@ -17,6 +17,8 @@
   $userData= mysqli_fetch_assoc($resQueryUserData);
   
   if($userData['rol']=='Estudiante')  header('Location: index.php');
+  if($userData['rol']=='Admin')  header('Location: indexAdmin.php');
+
 
   //consusltar grupos que creo el asesor
 
@@ -62,7 +64,7 @@
 
 
 
-    <! -- cabecera -->
+    <!-- cabecera -->
         <?php include("includes/header.php"); ?>
 
 
