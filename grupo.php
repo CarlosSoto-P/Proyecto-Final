@@ -38,6 +38,7 @@ include("connections/conn_localhost.php");
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -164,17 +165,20 @@ include("connections/conn_localhost.php");
                         </div>
                         <div class="card-body">
                             <div class="tab-content" id="myTabContent">
+                           <!-- Redordatorio no poner action.-->
+                            <form  method="post">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                
                                     aria-labelledby="posts-tab">
                                     <div class="form-group">
-                             <form action="grupo.php" method="post">
+                                   
                                         <label class="sr-only" for="message">post</label>
-
-                                        <input  class="form-control publicar" id ='publicar' name = 'title' placeholder="Titulo" rows="3" type="text"></input>
-                                        <textarea name = 'datosmsg'  class="form-control" id="message"  rows="3"
+                                       
+                                        <input  class="form-control publicar" id = 'title' name = 'title' placeholder="Titulo" rows="3" type="text"></input>
+                                        <textarea name = 'datosmsg'  class="form-control" id="datosmsg"  rows="3"
                                             placeholder="¿Cual es tu duda?"></textarea>
                                     </div>
-
+                               
                                 </div>
 
                             </div>
@@ -182,8 +186,12 @@ include("connections/conn_localhost.php");
 
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
-                                    <a  href = "grupo.php?idGrupo=<?php echo $grupoData['idGrupo']?>" class="btn btn-primary">Publicar</a>
+                                
+                                   <button  id="publicar" name="publicar">Publicar</button>
+                                
+                                   
                                 </div>
+                                </form>
 
                             </div>
                         </div>
@@ -194,24 +202,34 @@ include("connections/conn_localhost.php");
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
- 
 
- if (isset($_POST['datosmsg']) && $_POST['title']) {
-    $caja =  $_POST['datosmsg'];
-    echo $caja;
+    $grupoID = "";
+    $usuarioId = "";
+    $boxText = "";
+    $boxTitle = "";
 
-    $consulta = sprintf("INSERT INTO publicacion (idGrupo, idUsuario,contenido,titulo) VALUES ('%s','%s','%s','%s')",
-    mysqli_real_escape_string($connLocalhost, trim( $grupoData['idGrupo'])),
-    mysqli_real_escape_string($connLocalhost, trim( $userData['idUsuario'])),
-    mysqli_real_escape_string($connLocalhost, trim($_POST['datosmsg'])),
-    mysqli_real_escape_string($connLocalhost, trim($_POST['title']))
+    if (isset($_POST['publicar'])) {
+    $grupoID = $grupoData['idGrupo'];
+    $usuarioId = $userData['idUsuario'];
+    $boxText = $_POST['datosmsg'];
+    $boxTitle = $_POST['title'];
+    $mg = 0;
+    $consulta = sprintf("INSERT INTO publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
+    mysqli_real_escape_string($connLocalhost, trim($grupoID)),
+    mysqli_real_escape_string($connLocalhost, trim($grupoID)),
+    mysqli_real_escape_string($connLocalhost, trim($boxText)),
+    mysqli_real_escape_string($connLocalhost, trim($boxTitle)),
+    mysqli_real_escape_string($connLocalhost, trim($mg))
    
    
 );
 $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
 
-    
  }
+ 
+
+
+
 
 
                             for ($i=0; $i <100; $i++):
