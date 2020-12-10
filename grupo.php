@@ -39,11 +39,8 @@ include("connections/conn_localhost.php");
 <html lang="es">
 <head>
 
-<<<<<<< HEAD
 
 <script type="text/javascript" src="js/likes.js"></script>
-=======
->>>>>>> parent of 5237056... Update grupo.php
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -203,7 +200,6 @@ include("connections/conn_localhost.php");
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
-<<<<<<< HEAD
  
  $grupoID = "";
  $usuarioId = "";
@@ -212,8 +208,6 @@ include("connections/conn_localhost.php");
 
  if (isset($_POST['btnPublicar'])){
  
-=======
->>>>>>> parent of 5237056... Update grupo.php
 
     $grupoID = "";
     $usuarioId = "";
@@ -241,7 +235,6 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
  
 
 
-<<<<<<< HEAD
                           
                             ?>
 
@@ -249,12 +242,9 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                     <!--- \\\\\\\publicaciones-->
 
                     <?php
-=======
->>>>>>> parent of 5237056... Update grupo.php
 
 
 
-<<<<<<< HEAD
                         $ids = $grupoData['idGrupo'];
                         
                         $query_publicaciones = ("SELECT 
@@ -277,9 +267,6 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                         
 
                             do{
-=======
-                            for ($i=0; $i <100; $i++):
->>>>>>> parent of 5237056... Update grupo.php
                             ?>
 
                     <div class="card gedf-card">
@@ -324,7 +311,6 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                         </div>
                     </div>
-<<<<<<< HEAD
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                     <?php } while ($publicaciones = mysqli_fetch_assoc($resquery_publicaciones));
                     }else{
@@ -351,8 +337,6 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                         </div>
                         
-=======
->>>>>>> parent of 5237056... Update grupo.php
                     <br>
                     <hr>
                     <br>
