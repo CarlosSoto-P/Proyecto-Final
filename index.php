@@ -249,7 +249,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         from publicacion
                         LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
                         LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
-                        where publicacion.idGrupo  in ($ids)");
+                        where publicacion.idGrupo  in ($ids) ORDER BY idPublicacion DESC");
 
                         $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
                         $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
