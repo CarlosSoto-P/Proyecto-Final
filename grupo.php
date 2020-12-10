@@ -63,6 +63,16 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 }
 
 
+//query para saber si el usuario esta en el grupo
+$idUsuario = $userData['idUsuario'];
+$idGrupo = $grupoData['idGrupo'];
+$query_isMiembro =("SELECT * FROM miembros WHERE miembros.idUsuario =$idUsuario AND miembros.idGrupo =$idGrupo");
+$res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
+
+
+
+
+
                   
 ?>
 
@@ -214,7 +224,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
-                                    <button id="btnPublicar" name="btnPublicar">Publicar</button>
+                                    <button id="btnPublicar" class="btn btn-info" name="btnPublicar">Publicar</button>
                                 </div>
 
                             </div>
@@ -342,9 +352,14 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                             <?php } ?>
 
+                            <?php if ($userData['rol']=="Estudiante") {?>
+
                             <a href="responder.php?idPublicacion=<?php echo $publicaciones['idPublicacion'] ?>"
                                 class="card-link"><i class="fa fa-comment"></i>Ver solución</a>
-
+                            <?php } else{?>
+                            <a href="responder.php?idPublicacion=<?php echo $publicaciones['idPublicacion'] ?>"
+                                class="card-link"><i class="fa fa-comment"></i>Responder</a>
+                            <?php }?>
 
                             <!---<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>--->
                         </div>
@@ -384,8 +399,8 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
                         <ul>
                             <h3 class="card-title">
                                 <?php 
-                                     echo($grupoData['nombre']);
-                                ?>
+                echo($grupoData['nombre']);
+            ?>
                             </h3>
 
                         </ul>
@@ -395,24 +410,57 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 
                             <h6>
                                 <?php
-                                    echo($grupoData['descripcion'])
-                                ?>
+                echo($grupoData['descripcion'])
+            ?>
                             </h6>
                         </ul>
-                        <ul>
+                            <div class="btn-toolbar">
+                                <a class="btn btn-info btn-block"
+                                    href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
+                                    class="card-link">Informacion del Grupo</a>
 
+
+
+
+
+                                <?php 
+                                if($userData['rol']=="Estudiante" and mysqli_num_rows($res_queryIsMiembro)){
+                            
+                                ?>
+
+                                <form method='POST'>
+
+
+                                    <button id="btnAbandonar" class="btn btn-danger btn-block"
+                                        name="btnAbandonar">Abandonar grupo</button>
+
+                                    <?php } elseif($userData['rol']=="Estudiante"){?>
+                                    <button id="btnUnirse" class="btn btn-info btn-block" name="btnUnirse">Unirse a
+                                        grupo</button>
+
+
+                                    <?php }
+                                    ?>
+                            </div>
+                            </form>
+
+
+
+
+                            <?php 
+                            
+                            if(($userData['rol'])=="Asesor" ){
+
+                    
+                     ?>
                             <li>
-                                <a href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
-                                    class="card-link">Editar Usuario</a>
+
+
+                                <a href="#" class="card-link">Eliminar Miembros</a>
 
                             </li>
+                            <?php }?>
 
-                            <li>
-                                <a href="#" class="card-link">Cerrar Sesión</a>
-
-                            </li>
-
-                        </ul>
                     </div>
                 </div>
 
