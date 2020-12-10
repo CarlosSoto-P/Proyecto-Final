@@ -81,7 +81,7 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/mainRulo.css" rel="stylesheet" media="all">
+    <link href="css/registrar.css" rel="stylesheet" media="all">
 </head>
 
 <body>
@@ -137,13 +137,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="text" name="contraseña">
+                                    <input class="input--style-4" type="password" name="contraseña">
                                 </div>
                             </div>
                             <div >
                                 <div class="input-group">
                                     <label class="label">Confirmar Contraseña</label>
-                                    <input class="input--style-4" type="text" name="confirmarContraseña">
+                                    <input class="input--style-4" type="password" name="confirmarContraseña">
                                 </div>
                             </div>
                             
@@ -151,11 +151,22 @@
                        
                         <div class="p-t-15">
                             <button name="registrar_send" class="btn btn--radius-2 btn--blue" type="registrar">Registrar</button>
+                       
                         </div>
+                       
                     </form>
+                  
+                      
+
+                    <br>
+            <a href="login.php" class="h5">¿Ya tienes una cuenta?</a>
                 </div>
+                
             </div>
+           
+           
         </div>
+
     </div>
 
     <!-- Jquery JS-->
