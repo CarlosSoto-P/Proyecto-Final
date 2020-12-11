@@ -9,7 +9,7 @@ include("connections/conn_localhost.php");
 
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 
@@ -30,7 +30,7 @@ if(isset($_POST['crear_send'])) {
 
 
       if (!isset($error)) {
-          $query_crearGrupo = sprintf("INSERT INTO grupo (idAsesor,nombre, descripcion)  VALUES ('%s','%s','%s')",
+          $query_crearGrupo = sprintf("INSERT INTO SHT_grupo (idAsesor,nombre, descripcion)  VALUES ('%s','%s','%s')",
           mysqli_real_escape_string($connLocalhost,trim($userData['idUsuario'])),
           mysqli_real_escape_string($connLocalhost,trim($_POST['nombreGrupo'])),
           mysqli_real_escape_string($connLocalhost,trim($_POST['descripcionGrupo'])));

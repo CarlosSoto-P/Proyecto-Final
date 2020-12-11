@@ -9,7 +9,7 @@ if(!isset($_SESSION)) {
 if(!isset($_SESSION['id'])) header('Location: login.php');
 
 // query para obtener la informacion del usuario 
-$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+$query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
@@ -17,16 +17,16 @@ $userData= mysqli_fetch_assoc($resQueryUserData);
 
 //obtenemos los mienbros del grupo
 $query_miembros = "SELECT 
-usuario.nombres as 'nombreMiembro',
-usuario.idUsuario as 'idMiembro'
-from miembros
-left join usuario as usuario on usuario.idUsuario = miembros.idUsuario
-where miembros.idGrupo = {$_GET['idGrupo']}";
+SHT_usuario.nombres as 'nombreMiembro',
+SHT_usuario.idUsuario as 'idMiembro'
+from SHT_miembros
+left join SHT_usuario as SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+where SHT_miembros.idGrupo = {$_GET['idGrupo']}";
 $resQuery_Miembros = mysqli_query($connLocalhost, $query_miembros) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 
 
 // Recuperamos los datos del grupo
-$query_grupo = "SELECT * FROM grupo WHERE idGrupo = {$_GET['idGrupo']}";
+$query_grupo = "SELECT * FROM SHT_grupo WHERE idGrupo = {$_GET['idGrupo']}";
 $resQuery_Grupo = mysqli_query($connLocalhost, $query_grupo) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 $grupoData= mysqli_fetch_assoc($resQuery_Grupo);
 
@@ -48,7 +48,7 @@ $usuarioId = $userData['idUsuario'];
 $boxText = $_POST['datosmsg'];
 $boxTitle = $_POST['title'];
 $mg = 0;
-$consulta = sprintf("INSERT INTO publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
+$consulta = sprintf("INSERT INTO SHT_publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
 mysqli_real_escape_string($connLocalhost, trim($grupoID)),
 mysqli_real_escape_string($connLocalhost, trim($usuarioId)),
 mysqli_real_escape_string($connLocalhost, trim($boxText)),
@@ -66,7 +66,7 @@ $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El 
 //query para saber si el usuario esta en el grupo
 $idUsuario = $userData['idUsuario'];
 $idGrupo = $grupoData['idGrupo'];
-$query_isMiembro =("SELECT * FROM miembros WHERE miembros.idUsuario =$idUsuario AND miembros.idGrupo =$idGrupo");
+$query_isMiembro =("SELECT * FROM SHT_miembros WHERE SHT_miembros.idUsuario =$idUsuario AND SHT_miembros.idGrupo =$idGrupo");
 $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
 
@@ -248,7 +248,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
 
                             <?php 
-                            $query_megusta = sprintf("SELECT * FROM megustas WHERE idUsuario =%d AND idPublicacion = %d",
+                            $query_megusta = sprintf("SELECT * FROM SHT_megustas WHERE idUsuario =%d AND idPublicacion = %d",
                             mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario'])),
                             mysqli_real_escape_string($connLocalhost, trim($publicaciones['idPublicacion'])));
 
@@ -363,14 +363,14 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                            
                                  if (isset($_POST['btnEliminar'])){
                                     
-                                  
-                                     $queryDelete = ("DELETE FROM grupo WHERE idGrupo=$idg;");
+                                  // Eliminar grupos
+                                     $queryDelete = ("DELETE FROM SHT_grupo WHERE idGrupo=$idg;");
                                      $resqueryDelete = mysqli_query($connLocalhost, $queryDelete) or trigger_error("El query de login de eliminar falló");
-                                     $queryDeletePublicaciones = ("DELETE FROM publicacion WHERE idGrupo=$idg;");
+                                     // Eliminar las publicaciones del grupo
+                                     $queryDeletePublicaciones = ("DELETE FROM SHT_publicacion WHERE idGrupo=$idg;");
                               $resqueryDeletePublicaciones = mysqli_query($connLocalhost, $queryDeletePublicaciones) or trigger_error("El query de login de eliminar falló");
-
-
-                                $queryDeleteMembers = ("DELETE FROM miembros WHERE idGrupo = $idg;");
+                                    // Eliminar miembros del grupo
+                                $queryDeleteMembers = ("DELETE FROM SHT_miembros WHERE idGrupo = $idg;");
                                 $resqueryDelete = mysqli_query($connLocalhost, $queryDeleteMembers) or trigger_error("El query de login de eliminar falló");
                                 ?>
                                     <script>window.setTimeout(function() { window.location = '/webapps/Proyecto-Final/indexAdmin.php' }, 10);</script>  

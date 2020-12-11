@@ -7,7 +7,7 @@
   }
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
   mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
   );
   
@@ -20,12 +20,12 @@
   //consusltar grupos en los que este el usuario
 
   $query_ingrupo = sprintf("SELECT
-  grupo.idGrupo AS 'idGrupo',
-  grupo.nombre AS 'nombreGrupo'
-  FROM miembros 
-  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
-  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
-  WHERE miembros.idUsuario = %d",
+  SHT_grupo.idGrupo AS 'idGrupo',
+  SHT_grupo.nombre AS 'nombreGrupo'
+  FROM SHT_miembros 
+  LEFT JOIN SHT_grupo AS SHT_grupo ON  SHT_grupo.idGrupo = SHT_miembros.idGrupo
+  LEFT JOIN SHT_usuario AS SHT_usuario on SHT_usuario.idUsuario = SHT_iembros.idUsuario
+  WHERE SHT_miembros.idUsuario = %d",
 mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
 );
 
@@ -168,7 +168,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                     <?php
                     //consultar grupos
 
-                    $query_grupos =("SELECT * FROM grupo LIMIT 10");
+                    $query_grupos =("SELECT * FROM SHT_grupo LIMIT 10");
                     $resquery_grupos = mysqli_query($connLocalhost, $query_grupos);
                     $grupos = mysqli_fetch_assoc($resquery_grupos);
 
@@ -238,19 +238,19 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                         $ids = implode(",",$idGrupos);
                         
                         $query_publicaciones = ("SELECT 
-                        usuario.idUsuario as 'idUsuario',
-                        usuario.nombres as 'nombre',
-                        usuario.apellidos as 'apellido',
-                        grupo.idGrupo as 'idGrupo',
-                        grupo.nombre as 'grupo',
-                        publicacion.titulo as 'titulo',
-                        publicacion.contenido as 'contenido',
-                        publicacion.megustas as 'megustas',
-                        publicacion.idPublicacion as 'idPublicacion'
-                        from publicacion
-                        LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
-                        LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
-                        where publicacion.idGrupo  in ($ids) ORDER BY idPublicacion DESC");
+                        SHT_usuario.idUsuario as 'idUsuario',
+                        SHT_usuario.nombres as 'nombre',
+                        SHT_usuario.apellidos as 'apellido',
+                        SHT_grupo.idGrupo as 'idGrupo',
+                        SHT_grupo.nombre as 'grupo',
+                        SHT_publicacion.titulo as 'titulo',
+                        SHT_publicacion.contenido as 'contenido',
+                        SHT_publicacion.megustas as 'megustas',
+                        SHT_publicacion.idPublicacion as 'idPublicacion'
+                        from SHT_publicacion
+                        LEFT JOIN SHT_usuario as SHT_usuario ON SHT_usuario.idUsuario = SHT_publicacion.idUsuario
+                        LEFT JOIN SHT_grupo as SHT_grupo ON SHT_grupo.idGrupo = SHT_publicacion.idGrupo
+                        where SHT_publicacion.idGrupo  in ($ids) ORDER BY idPublicacion DESC");
 
                         $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
                         $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
@@ -301,7 +301,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
 
                             <?php 
-                            $query_megusta = sprintf("SELECT * FROM megustas WHERE idUsuario =%d AND idPublicacion = %d",
+                            $query_megusta = sprintf("SELECT * FROM SHT_megustas WHERE idUsuario =%d AND idPublicacion = %d",
                             mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario'])),
                             mysqli_real_escape_string($connLocalhost, trim($publicaciones['idPublicacion'])));
 

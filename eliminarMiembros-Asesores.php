@@ -8,7 +8,7 @@ if(!isset($_SESSION)) {
 if(!isset($_SESSION['id'])) header('Location: login.php');
 
 // query para obtener la informacion del usuario 
-$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+$query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
@@ -19,13 +19,13 @@ if($userData['rol'] =="Estudiante") header("Location: index.php");
 
 $idGrupo = $_GET['idGrupo'];
 $query_miembros =("SELECT 
-usuario.nombres as 'nombre',
-usuario.apellidos as 'apellido',
-usuario.idUsuario as 'idUsuario',
-miembros.idGrupo as 'idGrupo'
-from miembros
-left join usuario as usuario on usuario.idUsuario = miembros.idUsuario
-where miembros.idGrupo = $idGrupo");
+SHT_usuario.nombres as 'nombre',
+SHT_usuario.apellidos as 'apellido',
+SHT_usuario.idUsuario as 'idUsuario',
+SHT_miembros.idGrupo as 'idGrupo'
+from SHT_miembros
+left join SHT_usuario as SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+where SHT_miembros.idGrupo = $idGrupo");
 
 $res =mysqli_query($connLocalhost,$query_miembros);
 $miembros = mysqli_fetch_assoc($res);
