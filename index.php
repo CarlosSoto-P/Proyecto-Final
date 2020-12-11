@@ -122,7 +122,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                                 <?php
 
-                                if(isset($inGrupo)){
+                                if(mysqli_num_rows($resquery_ingrupo)){
 
                             do{
                             ?>

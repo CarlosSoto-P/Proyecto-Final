@@ -175,8 +175,7 @@
 
                     
                         //query para sacar las publicaciones de los grupos que creo el asesor
-                            
-                    if(isset($idGrupos)){
+                     
 
 
                         $ids = implode(",",$idGrupos);
@@ -198,6 +197,8 @@
 
                         $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
                         $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
+                               
+                    if(mysqli_num_rows($resquery_publicaciones)){
                         
 
                             do{

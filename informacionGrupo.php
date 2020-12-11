@@ -116,7 +116,7 @@ include("connections/conn_localhost.php");
                     </div>
 
                     <!--Informacion-->                          
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <hr>
                         <div class="card mb-3">
                             
@@ -194,25 +194,7 @@ include("connections/conn_localhost.php");
                     </div>
 
                 <!-- barra lateral -->
-                <div class="col-md-3 float-right">
-                    <hr>
-                    <div class="card gedf-card">
-                        
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                    Opciones de grupo
-                            </h3>
-                            <hr>
-                            <li>
-                            <a href="grupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"   class="card-link">Unirse al Grupo</a>
-                            </li>
-                            
-                            <li>
-                            <a href="index.php" class="card-link">Abandonar grupo</a>                            
-                            </li>
-                                                
-                        </div>
-                    </div>
+              
                    
                 </div>
                     

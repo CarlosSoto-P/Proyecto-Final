@@ -172,14 +172,12 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
                 </div>
 
-
+                <?php
+                    if($perfil['rol']=="Estudiante"){
+                ?>
                 <div class="h1 bg-primary text-white text-center">
                     Esta unido a estos grupos
                 </div>
-
-
-                
-
                 <?php
                 
                 do{
@@ -205,8 +203,43 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
                 </div>
 
                 <?php }while($inGrupo = mysqli_fetch_assoc($resquery_ingrupo))?>
+                <?php } else {
+                    ?>
+                <div class="h1 bg-primary text-white text-center">
+                    Grupos del Asesor
+                </div>
+                <?php
+                $idAsesor= $perfil['idUsuario'];
+                $query_gruposCreados =("SELECT * FROM grupo WHERE idAsesor = $idAsesor");
+                $res = mysqli_query($connLocalhost,$query_gruposCreados);
+                $creados=mysqli_fetch_assoc($res);
                 
+                do{
 
+                ?>
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="ml-2">
+                                    <div class="h5 m-0">
+
+                                        <a href="grupo.php?idGrupo=<?php echo $creados['idGrupo']; ?>"><?php echo $creados['nombre']?>
+                                        </a>
+                                    </div>
+                                    <div class="h7 text-black"> <?php echo $creados['descripcion']?></div>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php } while($creados = mysqli_fetch_assoc($res));
+                }
+                
+                ?>
 
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"

@@ -71,6 +71,32 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
 
 
+//query para abandorar el grupo
+if(isset($_POST['btnAbandonar'])){
+
+$query_abondar = ("DELETE  FROM miembros WHERE  idUsuario =$idUsuario ");
+$res = mysqli_query($connLocalhost,$query_abondar);
+header("Location: grupo.php?idGrupo=$idGrupo");
+
+}
+
+//query para unirse al grupo
+if(isset($_POST['btnUnirse'])){
+
+    $query_unirse=("INSERT INTO miembros (idGrupo, idUsuario) VALUES($idGrupo,$idUsuario)");
+    $res_unirse = mysqli_query($connLocalhost,$query_unirse) or trigger_error("la query de unirse fallo");
+
+    header("Location: grupo.php?idGrupo=$idGrupo");
+
+
+
+}
+
+
+
+
+
+
 
 
                   
@@ -92,6 +118,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script type="text/javascript" src="js/likes.js"></script>
+
     <title>Grupo</title>
 </head>
 
@@ -138,8 +165,6 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                             <div class="h5">
                                 <h5 class="text-primary">Miembros</h5>
 
-
-
                             </div>
 
                             <div clas="h5">
@@ -179,10 +204,11 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
                 </div>
 
-
-
                 <div class="col-md-6 gedf-main">
 
+
+                    <?php 
+                    if(mysqli_num_rows($res_queryIsMiembro) or $userData['rol']=="Asesor"){?>
 
 
                     <hr>
@@ -237,6 +263,10 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
 
                     <?php
+
+
+
+
                      $id = $grupoData['idGrupo'];
                       $query_publicaciones = ("SELECT 
                       usuario.idUsuario as 'idUsuario',
@@ -260,7 +290,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                     
                         //query para sacar las publicaciones de la base de datos
                             
-                    if(isset($resquery_publicaciones)){
+                    if(isset($publicaciones)){
 
 
                        
@@ -379,7 +409,16 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                     <?php
                     }
                     ?>
-
+                    <?php } else{
+                        
+                        ?>
+                    <div class="text-center text-danger h1">
+                        Unete al grupo primero
+                    </div>
+                    <div class="text-center">
+                        <img src="imagenes/nohay.jpg" alt="">
+                    </div>
+                    <?php }?>
 
 
 
@@ -414,52 +453,57 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
             ?>
                             </h6>
                         </ul>
-                            <div class="btn-toolbar">
-                                <a class="btn btn-info btn-block"
-                                    href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
-                                    class="card-link">Informacion del Grupo</a>
+                        <div class="btn-toolbar">
+                            <a class="btn btn-info btn-block"
+                                href="informacionGrupo.php?idGrupo=<?php echo $grupoData['idGrupo']; ?>"
+                                class="card-link">Informacion del Grupo</a>
+
+                        </div>
 
 
+                        <br>
 
 
-
-                                <?php 
+                        <form method='POST'>
+                            <?php 
                                 if($userData['rol']=="Estudiante" and mysqli_num_rows($res_queryIsMiembro)){
                             
                                 ?>
 
-                                <form method='POST'>
+                            <button id="btnAbandonar" class="btn btn-danger btn-block" name="btnAbandonar">Abandonar
+                                grupo</button>
+
+                            <?php } elseif($userData['rol']=="Estudiante" and !mysqli_num_rows($res_queryIsMiembro)){?>
+
+                            <button id="btnUnirse" class="btn btn-info btn-block" name="btnUnirse">Unirse a
+                                grupo</button>
 
 
-                                    <button id="btnAbandonar" class="btn btn-danger btn-block"
-                                        name="btnAbandonar">Abandonar grupo</button>
-
-                                    <?php } elseif($userData['rol']=="Estudiante"){?>
-                                    <button id="btnUnirse" class="btn btn-info btn-block" name="btnUnirse">Unirse a
-                                        grupo</button>
-
-
-                                    <?php }
+                            <?php }
                                     ?>
-                            </div>
-                            </form>
+                        </form>
 
 
 
 
-                            <?php 
+
+
+                        <?php 
                             
                             if(($userData['rol'])=="Asesor" ){
 
                     
                      ?>
+                        <ul>
                             <li>
 
 
-                                <a href="#" class="card-link">Eliminar Miembros</a>
+                                <a href="eliminarMiembros-Asesores.php?idGrupo=<?php echo $grupoData['idGrupo']?>" class="card-link">Eliminar Miembros</a>
 
                             </li>
-                            <?php }?>
+
+                        </ul>
+                        <?php }?>
 
                     </div>
                 </div>
