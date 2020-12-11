@@ -9,7 +9,7 @@ if(!isset($_SESSION)) {
 if(!isset($_SESSION['id'])) header('Location: login.php');
 
 // query para obtener la informacion del usuario 
-$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+$query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
@@ -17,16 +17,16 @@ $userData= mysqli_fetch_assoc($resQueryUserData);
 
 //obtenemos los mienbros del grupo
 $query_miembros = "SELECT 
-usuario.nombres as 'nombreMiembro',
-usuario.idUsuario as 'idMiembro'
-from miembros
-left join usuario as usuario on usuario.idUsuario = miembros.idUsuario
-where miembros.idGrupo = {$_GET['idGrupo']}";
+SHT_usuario.nombres as 'nombreMiembro',
+SHT_usuario.idUsuario as 'idMiembro'
+from SHT_miembros
+left join SHT_usuario as SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+where SHT_miembros.idGrupo = {$_GET['idGrupo']}";
 $resQuery_Miembros = mysqli_query($connLocalhost, $query_miembros) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 
 
 // Recuperamos los datos del grupo
-$query_grupo = "SELECT * FROM grupo WHERE idGrupo = {$_GET['idGrupo']}";
+$query_grupo = "SELECT * FROM SHT_grupo WHERE idGrupo = {$_GET['idGrupo']}";
 $resQuery_Grupo = mysqli_query($connLocalhost, $query_grupo) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 $grupoData= mysqli_fetch_assoc($resQuery_Grupo);
 
@@ -48,7 +48,7 @@ $usuarioId = $userData['idUsuario'];
 $boxText = $_POST['datosmsg'];
 $boxTitle = $_POST['title'];
 $mg = 0;
-$consulta = sprintf("INSERT INTO publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
+$consulta = sprintf("INSERT INTO SHT_publicacion (idGrupo,idUsuario,contenido,titulo,megustas) VALUES ('%s','%s','%s','%s','%s')",
 mysqli_real_escape_string($connLocalhost, trim($grupoID)),
 mysqli_real_escape_string($connLocalhost, trim($usuarioId)),
 mysqli_real_escape_string($connLocalhost, trim($boxText)),
@@ -74,7 +74,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 //query para abandorar el grupo
 if(isset($_POST['btnAbandonar'])){
 
-$query_abondar = ("DELETE  FROM miembros WHERE  idUsuario =$idUsuario ");
+$query_abondar = ("DELETE  FROM SHT_miembros WHERE  idUsuario =$idUsuario ");
 $res = mysqli_query($connLocalhost,$query_abondar);
 header("Location: grupo.php?idGrupo=$idGrupo");
 
@@ -83,7 +83,7 @@ header("Location: grupo.php?idGrupo=$idGrupo");
 //query para unirse al grupo
 if(isset($_POST['btnUnirse'])){
 
-    $query_unirse=("INSERT INTO miembros (idGrupo, idUsuario) VALUES($idGrupo,$idUsuario)");
+    $query_unirse=("INSERT INTO SHT_miembros (idGrupo, idUsuario) VALUES($idGrupo,$idUsuario)");
     $res_unirse = mysqli_query($connLocalhost,$query_unirse) or trigger_error("la query de unirse fallo");
 
     header("Location: grupo.php?idGrupo=$idGrupo");
@@ -269,19 +269,19 @@ if(isset($_POST['btnUnirse'])){
 
                      $id = $grupoData['idGrupo'];
                       $query_publicaciones = ("SELECT 
-                      usuario.idUsuario as 'idUsuario',
-                      usuario.nombres as 'nombre',
-                      usuario.apellidos as 'apellido',
-                      grupo.idGrupo as 'idGrupo',
-                      grupo.nombre as 'grupo',
-                      publicacion.titulo as 'titulo',
-                      publicacion.contenido as 'contenido',
-                      publicacion.megustas as 'megustas',
-                      publicacion.idPublicacion as 'idPublicacion'
-                      from publicacion
-                      LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
-                      LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
-                       where publicacion.idGrupo  = $id ORDER BY idPublicacion DESC");
+                      SHT_usuario.idUsuario as 'idUsuario',
+                      SHT_usuario.nombres as 'nombre',
+                      SHT_usuario.apellidos as 'apellido',
+                      SHT_grupo.idGrupo as 'idGrupo',
+                      SHT_grupo.nombre as 'grupo',
+                      SHT_publicacion.titulo as 'titulo',
+                      SHT_publicacion.contenido as 'contenido',
+                      SHT_publicacion.megustas as 'megustas',
+                      SHT_publicacion.idPublicacion as 'idPublicacion'
+                      from SHT_publicacion
+                      LEFT JOIN SHT_usuario as SHT_usuario ON SHT_usuario.idUsuario = SHT_publicacion.idUsuario
+                      LEFT JOIN SHT_grupo as SHT_grupo ON SHT_grupo.idGrupo = SHT_publicacion.idGrupo
+                       where SHT_publicacion.idGrupo  = $id ORDER BY idPublicacion DESC");
       
                       $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
                       $publicaciones = mysqli_fetch_assoc($resquery_publicaciones);
@@ -344,7 +344,7 @@ if(isset($_POST['btnUnirse'])){
 
 
                             <?php 
-                            $query_megusta = sprintf("SELECT * FROM megustas WHERE idUsuario =%d AND idPublicacion = %d",
+                            $query_megusta = sprintf("SELECT * FROM SHT_megustas WHERE idUsuario =%d AND idPublicacion = %d",
                             mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario'])),
                             mysqli_real_escape_string($connLocalhost, trim($publicaciones['idPublicacion'])));
 

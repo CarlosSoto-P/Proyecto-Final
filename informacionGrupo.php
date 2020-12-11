@@ -11,46 +11,46 @@ if(!isset($_SESSION['id'])) header('Location: login.php');
 
 
 // obtenemos la informacion del usuario 
-$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+$query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
 $userData= mysqli_fetch_assoc($resQueryUserData);
 
 // Recuperamos los datos del grupo
-$query_grupo = "SELECT * FROM grupo WHERE idGrupo = {$_GET['idGrupo']}";
+$query_grupo = "SELECT * FROM SHT_grupo WHERE idGrupo = {$_GET['idGrupo']}";
 $resQuery_Grupo = mysqli_query($connLocalhost, $query_grupo) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 $grupoData= mysqli_fetch_assoc($resQuery_Grupo);
 
 //query para el numero de integrantes 
-$query_numeroDeIntegrantes = "SELECT count(*) as total from miembros
+$query_numeroDeIntegrantes = "SELECT count(*) as total from SHT_miembros
 where idGrupo={$_GET['idGrupo']};";
 $resQuery_NumeroMiembros = mysqli_query($connLocalhost, $query_numeroDeIntegrantes) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 $numero = mysqli_fetch_assoc($resQuery_NumeroMiembros);
 
 //obtenemos la informacion del asesor 
 $query_Asesor = "SELECT 
-usuario.nombres as 'nombreAsesor',
-usuario.idUsuario as 'idAsesor',
-usuario.rol as 'rol',
-usuario.apellidos as 'apellidos',
-usuario.descripcion as 'descripcion',
-usuario.telefono as 'telefono',
-usuario.correo as 'correo'
-from grupo
-left join usuario as usuario on usuario.idUsuario = grupo.idAsesor
-where grupo.idGrupo = {$_GET['idGrupo']}";
+SHT_usuario.nombres as 'nombreAsesor',
+SHT_usuario.idUsuario as 'idAsesor',
+SHT_usuario.rol as 'rol',
+SHT_usuario.apellidos as 'apellidos',
+SHT_usuario.descripcion as 'descripcion',
+SHT_usuario.telefono as 'telefono',
+SHT_usuario.correo as 'correo'
+from SHT_grupo
+left join SHT_usuario as SHT_usuario on SHT_usuario.idUsuario = SHT_grupo.idAsesor
+where SHT_grupo.idGrupo = {$_GET['idGrupo']}";
 $resQuery_Asesor = mysqli_query($connLocalhost, $query_Asesor) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 $asesorData = mysqli_fetch_assoc($resQuery_Asesor);
 
 
 //obtenemos los mienbros del grupo
 $query_miembros = "SELECT 
-usuario.nombres as 'nombreMiembro',
-usuario.idUsuario as 'idMiembro'
-from miembros
-left join usuario as usuario on usuario.idUsuario = miembros.idUsuario
-where miembros.idGrupo = {$_GET['idGrupo']}";
+SHT_usuario.nombres as 'nombreMiembro',
+SHT_usuario.idUsuario as 'idMiembro'
+from SHT_miembros
+left join SHT_usuario as SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+where SHT_miembros.idGrupo = {$_GET['idGrupo']}";
 $resQuery_Miembros = mysqli_query($connLocalhost, $query_miembros) or trigger_error("El query para obtener los detalles del grupo loggeado falló");
 
 // Incluimos la conexión a la base de datos

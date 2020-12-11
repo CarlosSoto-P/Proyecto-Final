@@ -7,7 +7,7 @@
   }
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
   mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
   );
   
@@ -21,10 +21,10 @@
   $query_ingrupo = sprintf("SELECT
   grupo.idGrupo AS 'idGrupo',
   grupo.nombre AS 'nombreGrupo'
-  FROM miembros 
-  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
-  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
-  WHERE miembros.idUsuario = %d",
+  FROM SHT_miembros 
+  LEFT JOIN SHT_grupo AS SHT_grupo ON  SHT_grupo.idGrupo = SHT_miembros.idGrupo
+  LEFT JOIN SHT_usuario AS SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+  WHERE SHT_miembros.idUsuario = %d",
 mysqli_real_escape_string($connLocalhost, trim($userData['idUsuario']))
 );
 
@@ -40,7 +40,7 @@ $inGrupo = mysqli_fetch_assoc($resquery_ingrupo);
 
 //buscar resultados
 $buscar = "'%".$_GET['buscar']."%'";
-$query_buscar =("SELECT * FROM grupo WHERE nombre LIKE  $buscar OR descripcion LIKE $buscar");
+$query_buscar =("SELECT * FROM SHT_grupo WHERE nombre LIKE  $buscar OR descripcion LIKE $buscar");
 
 $resquery_bucar = mysqli_query($connLocalhost, $query_buscar) or trigger_error("fallo buscar");
 $resultados = mysqli_fetch_assoc($resquery_bucar);

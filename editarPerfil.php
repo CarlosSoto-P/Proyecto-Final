@@ -9,7 +9,7 @@ include("connections/conn_localhost.php");
 
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 
@@ -31,7 +31,7 @@ if($_POST['contraseña'] != $_POST['contraseña2']){
     // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
     if(!isset($error)) {
       // Preparamos la consulta para guardar el registro en la BD
-      $queryUpdateUser = sprintf("UPDATE usuario SET nombres='%s', apellidos='%s', telefono='%s', correo='%s', contraseña='%s', descripcion='%s' WHERE idUsuario =%d",
+      $queryUpdateUser = sprintf("UPDATE SHT_usuario SET nombres='%s', apellidos='%s', telefono='%s', correo='%s', contraseña='%s', descripcion='%s' WHERE idUsuario =%d",
         mysqli_real_escape_string($connLocalhost, trim($_POST['nombres'])),
         mysqli_real_escape_string($connLocalhost, trim($_POST['apellidos'])),
         mysqli_real_escape_string($connLocalhost, trim($_POST['telefono'])),
