@@ -7,7 +7,7 @@ if(!isset($_SESSION)) {
 }
 if(!isset($_SESSION['id'])) header('Location: login.php');
 
-$query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+$query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
 mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
 );
 
@@ -81,7 +81,7 @@ setInterval(function(){ajax();},1000);
         $nombre = $userData['nombres'];
         $mensaje = $_POST['mensaje'];
 if (!empty($mensaje)) {
-    $consulta = sprintf("INSERT INTO message (idnombre, mensaje) VALUES ('%s','%s')",
+    $consulta = sprintf("INSERT INTO SHT_message (idnombre, mensaje) VALUES ('%s','%s')",
     mysqli_real_escape_string($connLocalhost, trim($nombre)),
     mysqli_real_escape_string($connLocalhost, trim($_POST['mensaje']))
 
