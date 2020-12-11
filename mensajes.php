@@ -70,7 +70,7 @@ setInterval(function(){ajax();},1000);
     <textarea name="mensaje"placeholder = "Ingresa tu mensaje"></textarea>
     <input class = 'pulse' type="submit" name ="send" value = "Enviar">
     </form>
-    <a href="http://localhost/GitHub/Proyecto-Final/login.php">Ya tienes una cuenta</a>
+  
     <?php
   
      $mensaje ="";
