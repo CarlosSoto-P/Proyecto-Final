@@ -18,11 +18,12 @@
   if($userData['rol']=='Estudiante')  header('Location: index.php');
   if($userData['rol']=='Asesor')  header('Location: indexAsesor.php');
 
+
   //consusltar grupos que creo el asesor
 
   $query_grupos = sprintf("SELECT * FROM grupo");
   $res_grupos = mysqli_query($connLocalhost,$query_grupos);
-  $grupos = mysqli_fetch_assoc($res_grupos);
+ 
 
 ?>
 
@@ -44,6 +45,29 @@
     <!-- cabecera -->
     <?php include("includes/headerAdmin.php"); ?>
 
+            <!-- barra lateral -->
+            <div class="col-md-3 float-right">
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Panel de Control</h5>
+                            <hr>
+                            <ul>
+
+                                <li>
+                                    <a href="#" class="card-link">Editar Perfil</a>
+
+                                </li>
+
+                                <li>
+                                    <a href="includes/cerrar_sesion.php" class="card-link">Cerrar Sesion</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+            </div>
     <div class = "fondoAdmin">
 
 
@@ -78,26 +102,40 @@
                         <div class="card-body">
                             <h5>Grupos</h5>
                             <hr>
-
+                          
                             <div class="h7">
                                <?php
-                               while($grupos= mysqli_fetch_array($res_grupos))
-                               {?>
+                               while($grupos= mysqli_fetch_array($res_grupos)) {
+                             
+                              ?>
+
                                <ul>
+
                                     <li>
-                                        <a href="grupo.php?idGrupo=<?php echo $grupos['idGrupo']; ?>"
+                                    <form method="post">
+                                        <a href="grupoAdmin.php?idGrupo=<?php echo $grupos['idGrupo']; ?>"
                                             class="text-dark"><?php echo($grupos['nombre']);?></a>
+                                            <br>
+                                            
                                     </li>
 
                                 </ul>
                                 <?php } ?>
 
                             </div>
+                         
                             
                         </div>
 
                     </div>
+                    <!--Eliminar grupo -->
+                  
+                    <?php
+                 
+                
 
+                    
+                    ?>
 
 
                 </div> 
@@ -108,29 +146,6 @@
 
 
 
-            <!-- barra lateral -->
-            <div class="col-md-3 float-right">
-                    
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Panel de Control</h5>
-                            <hr>
-                            <ul>
-
-                                <li>
-                                    <a href="#" class="card-link">Editar Perfil</a>
-
-                                </li>
-
-                                <li>
-                                    <a href="includes/cerrar_sesion.php" class="card-link">Cerrar Sesion</a>
-
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-            </div>
 
         </div> 
          
