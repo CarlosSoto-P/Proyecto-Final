@@ -1,10 +1,10 @@
 <?php
 // Definimos variables con los datos necesarios para la conexión
-$servidor = "byvwn65uxblxcrtg2waf-mysql.services.clever-cloud.com"; // Puede ser una ubicación remota
-$baseDatos = "byvwn65uxblxcrtg2waf";
+$servidor = "localhost"; // Puede ser una ubicación remota
+$baseDatos = "alonsmez_webapps";
 
-$usuarioBd = "ux85zoov8qpiup9m";
-$passwordBd = "Uen756wgHtkYiNgxtd52";
+$usuarioBd = "alonsmez_webapps";
+$passwordBd = "L0quesea!";
 
 
 // Creamos la conexión
