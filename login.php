@@ -47,7 +47,8 @@ if(isset($_POST['login_sent'])) {
 
     if($_SESSION['rol'] == 'Estudiante'){
 
-	header('Location: index.php');
+    header('Location: index.php');
+    
 }elseif ($_SESSION['rol']=='Asesor') {
     # code...
     header('Location: indexAsesor.php');
