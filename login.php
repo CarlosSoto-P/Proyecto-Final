@@ -50,8 +50,11 @@ if(isset($_POST['login_sent'])) {
 	header('Location: index.php');
 }elseif ($_SESSION['rol']=='Asesor') {
     # code...
-}{
-	header('Location: indexAsesor.php');
+    header('Location: indexAsesor.php');
+}
+elseif ($_SESSION['rol'] == 'Admin'){
+    header('Location: indexAdmin.php');
+	
 
 }
 
