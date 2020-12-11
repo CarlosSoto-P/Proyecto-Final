@@ -8,7 +8,7 @@
   if(!isset($_SESSION['id'])) header('Location: login.php');
   
   //consultar informacion del usuario
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
   mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
   );
   $resQueryUserData = mysqli_query($connLocalhost, $query_userData) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
@@ -20,11 +20,11 @@
 
 
   //consusltar de todos los grupos  
-  $query_grupos = sprintf("SELECT * FROM grupo");
+  $query_grupos = sprintf("SELECT * FROM SHT_grupo");
   $res_grupos = mysqli_query($connLocalhost,$query_grupos);
 
   //consusltar de todos los usuarios  
-  $query_usuarios = sprintf("SELECT * FROM usuario");
+  $query_usuarios = sprintf("SELECT * FROM SHT_usuario");
   $res_usuarios = mysqli_query($connLocalhost,$query_usuarios);
  
 
