@@ -373,11 +373,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                                 $queryDeleteMembers = ("DELETE FROM miembros WHERE idGrupo = $idg;");
                                 $resqueryDelete = mysqli_query($connLocalhost, $queryDeleteMembers) or trigger_error("El query de login de eliminar falló");
                                 ?>
-<<<<<<< HEAD
                                     <script>window.setTimeout(function() { window.location = '/webapps/Proyecto-Final/indexAdmin.php' }, 10);</script>  
-=======
-<script>window.setTimeout(function() { window.location = '/webapps/Proyecto-Final/indexAdmin.php' }, 10);</script>  
->>>>>>> fba14bbfc099c5cc61485e9d7ea0a9bf3e828af3
                                 <?php
 
                                 }
