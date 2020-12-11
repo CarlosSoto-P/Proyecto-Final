@@ -14,7 +14,7 @@
 
 
  
-    $consulta = "SELECT * FROM byvwn65uxblxcrtg2waf.message ;";
+    $consulta = "SELECT * FROM message ;";
     $resQueryMessage = mysqli_query($connLocalhost, $consulta) or trigger_error("El query falló");
         while ($fila = $resQueryMessage->fetch_array()): 
 ?>
