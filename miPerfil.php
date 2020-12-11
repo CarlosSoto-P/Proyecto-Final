@@ -17,7 +17,7 @@
   include("includes/common_functions.php");
 
   // Recuperamos los datos del usuario tomando la referencia de $_SESSION
-  $queryLoggedUserDetail = "SELECT * FROM usuario WHERE idUsuario = {$_SESSION['id']}";
+  $queryLoggedUserDetail = "SELECT * FROM SHT_usuario WHERE idUsuario = {$_SESSION['id']}";
 
   // Ejecutamos el query
   $resQueryLoggedUserDetail = mysqli_query($connLocalhost, $queryLoggedUserDetail) or trigger_error("El query para obtener los detalles del usuario loggeado falló");

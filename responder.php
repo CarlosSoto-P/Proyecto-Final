@@ -8,7 +8,7 @@
   if(!isset($_SESSION['id'])) header('Location: login.php');
 
 
-  $query_userData = sprintf("SELECT * FROM usuario WHERE idUsuario =%d",
+  $query_userData = sprintf("SELECT * FROM SHT_usuario WHERE idUsuario =%d",
   mysqli_real_escape_string($connLocalhost, trim($_SESSION['id']))
   );
   $resquery_userData = mysqli_query($connLocalhost,$query_userData);
@@ -17,19 +17,19 @@
 
   $id = $_GET['idPublicacion'];
   $query_publicaciones = ("SELECT 
-  usuario.idUsuario as 'idUsuario',
-  usuario.nombres as 'nombre',
-  usuario.apellidos as 'apellido',
-  grupo.idGrupo as 'idGrupo',
-  grupo.nombre as 'grupo',
-  publicacion.titulo as 'titulo',
-  publicacion.contenido as 'contenido',
-  publicacion.megustas as 'megustas',
-  publicacion.idPublicacion as 'idPublicacion'
-  from publicacion
-  LEFT JOIN usuario as usuario ON usuario.idUsuario = publicacion.idUsuario
-  LEFT JOIN grupo as grupo ON grupo.idGrupo = publicacion.idGrupo
-  where publicacion.idPublicacion = $id");
+  SHT_usuario.idUsuario as 'idUsuario',
+  SHT_usuario.nombres as 'nombre',
+  SHT_usuario.apellidos as 'apellido',
+  SHT_grupo.idGrupo as 'idGrupo',
+  SHT_grupo.nombre as 'grupo',
+  SHT_publicacion.titulo as 'titulo',
+  SHT_publicacion.contenido as 'contenido',
+  SHT_publicacion.megustas as 'megustas',
+  SHT_publicacion.idPublicacion as 'idPublicacion'
+  from SHT_publicacion
+  LEFT JOIN SHT_usuario as SHT_usuario ON SHT_usuario.idUsuario = SHT_publicacion.idUsuario
+  LEFT JOIN SHT_grupo as SHT_grupo ON SHT_grupo.idGrupo = SHT_publicacion.idGrupo
+  where SHT_publicacion.idPublicacion = $id");
 
   $resquery_publicaciones = mysqli_query($connLocalhost, $query_publicaciones);
   $publicacion= mysqli_fetch_assoc($resquery_publicaciones);

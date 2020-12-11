@@ -12,7 +12,7 @@
   include("includes/common_functions.php");
 
   // Recuperamos los datos del usuario tomando la referencia de $_SESSION
-  $query_perfil = "SELECT * FROM usuario WHERE idUsuario = {$_GET['idUsuario']}";
+  $query_perfil = "SELECT * FROM SHT_usuario WHERE idUsuario = {$_GET['idUsuario']}";
 
   // Ejecutamos el query
   $resquery_perfil = mysqli_query($connLocalhost, $query_perfil) or trigger_error("El query para obtener los detalles del usuario loggeado falló");

@@ -16,7 +16,7 @@
 
     // Validación de email
     // Preparamos la consulta para determinar si el email porporcionado ya existe en la BD
-    $queryCheckEmail = sprintf("SELECT idUsuario FROM usuario WHERE correo = '%s'",
+    $queryCheckEmail = sprintf("SELECT idUsuario FROM SHT_usuario WHERE correo = '%s'",
       mysqli_real_escape_string($connLocalhost, trim($_POST['correos']))
     );
 
@@ -32,7 +32,7 @@
     // Procedemos a añadir a la base de datos al usuario SOLO SI NO HAY ERRORES
     if(!isset($error)) {
       // Preparamos la consulta para guardar el registro en la BD
-      $queryInsertUser = sprintf("INSERT INTO usuario (nombres, apellidos, telefono, correo,contraseña,rol,descripcion) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+      $queryInsertUser = sprintf("INSERT INTO SHT_usuario (nombres, apellidos, telefono, correo,contraseña,rol,descripcion) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
           mysqli_real_escape_string($connLocalhost, trim($_POST['nombre'])),
           mysqli_real_escape_string($connLocalhost, trim($_POST['apellido'])),
           mysqli_real_escape_string($connLocalhost, trim($_POST['telefono'])),

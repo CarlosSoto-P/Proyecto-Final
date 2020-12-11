@@ -17,7 +17,7 @@
   include("includes/common_functions.php");
 
   // Recuperamos los datos del usuario tomando la referencia de $_SESSION
-  $query_perfil = "SELECT * FROM usuario WHERE idUsuario = {$_GET['idUsuario']}";
+  $query_perfil = "SELECT * FROM SHT_usuario WHERE idUsuario = {$_GET['idUsuario']}";
 
   // Ejecutamos el query
   $resquery_perfil = mysqli_query($connLocalhost, $query_perfil) or trigger_error("El query para obtener los detalles del usuario loggeado falló");
@@ -28,13 +28,13 @@
 
   //sacar los grupos donde esta el usuario.
   $query_ingrupo = sprintf("SELECT
-  grupo.idGrupo AS 'idGrupo',
-  grupo.nombre AS 'nombreGrupo',
-  grupo.descripcion AS 'descripcionGrupo'
-  FROM miembros 
-  LEFT JOIN grupo AS grupo ON  grupo.idGrupo = miembros.idGrupo
-  LEFT JOIN usuario AS usuario on usuario.idUsuario = miembros.idUsuario
-  WHERE miembros.idUsuario = %d",
+  SHT_grupo.idGrupo AS 'idGrupo',
+  SHT_grupo.nombre AS 'nombreGrupo',
+  SHT_grupo.descripcion AS 'descripcionGrupo'
+  FROM SHT_miembros 
+  LEFT JOIN SHT_grupo AS SHT_grupo ON  SHT_grupo.idGrupo = SHT_miembros.idGrupo
+  LEFT JOIN SHT_usuario AS SHT_usuario on SHT_usuario.idUsuario = SHT_miembros.idUsuario
+  WHERE SHT_miembros.idUsuario = %d",
 mysqli_real_escape_string($connLocalhost, trim($_GET['idUsuario']))
 );
 
