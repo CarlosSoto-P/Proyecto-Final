@@ -19,10 +19,13 @@
   if($userData['rol']=='Asesor')  header('Location: indexAsesor.php');
 
 
-  //consusltar grupos que creo el asesor
-
+  //consusltar de todos los grupos  
   $query_grupos = sprintf("SELECT * FROM grupo");
   $res_grupos = mysqli_query($connLocalhost,$query_grupos);
+
+  //consusltar de todos los usuarios  
+  $query_usuarios = sprintf("SELECT * FROM usuario");
+  $res_usuarios = mysqli_query($connLocalhost,$query_usuarios);
  
 
 ?>
@@ -67,7 +70,36 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class = "h7">
+                                <h5>Usuarios</h5>
+                                <hr>
+                                <?php
+                               while($usuarios= mysqli_fetch_array($res_usuarios)) 
+                               { ?>
+
+                               <ul>
+
+                                    <li>
+                                    <form method="post">
+                                        <a href="perfilAdmin.php?idUsuario=<?php echo $usuarios['idUsuario']?>"
+                                            class="text-dark"><?php echo($usuarios['nombres']);?></a>
+                                            <br>
+                                            
+                                    </li>
+
+                                </ul>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+
             </div>
+
+
+            
     <div class = "fondoAdmin">
 
 
@@ -105,9 +137,8 @@
                           
                             <div class="h7">
                                <?php
-                               while($grupos= mysqli_fetch_array($res_grupos)) {
-                             
-                              ?>
+                               while($grupos= mysqli_fetch_array($res_grupos)) 
+                               { ?>
 
                                <ul>
 

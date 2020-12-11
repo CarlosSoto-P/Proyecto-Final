@@ -3,8 +3,6 @@
         <div class="card-body">
             <h5 class="card-title">Control Panel</h5>
 
-
-
                 <li>
                     <a href="editarPerfil.php" class="card-link">Editar perfil</a>
                 </li>
@@ -13,10 +11,6 @@
                     <a href="includes/cerrar_sesion.php" class="card-link">Cerrar sesión</a>
 
                 </li>
-
-
-
-
 
         </div>
     </div>

@@ -333,8 +333,8 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                         <ul>
                             <h3 class="card-title">
                                 <?php 
-                echo($grupoData['nombre']);
-            ?>
+                                    echo($grupoData['nombre']);
+                                ?>
                             </h3>
 
                         </ul>
@@ -344,8 +344,8 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
 
                             <h6>
                                 <?php
-                echo($grupoData['descripcion'])
-            ?>
+                                    echo($grupoData['descripcion'])
+                                ?>
                             </h6>
                         </ul>
                             <div class="btn-toolbar">
@@ -370,7 +370,7 @@ $res_queryIsMiembro = mysqli_query($connLocalhost,$query_isMiembro);
                                 $queryDeleteMembers = ("DELETE FROM miembros WHERE idGrupo = $idg;");
                                 $resqueryDelete = mysqli_query($connLocalhost, $queryDeleteMembers) or trigger_error("El query de login de eliminar falló");
                                 ?>
-<script>window.setTimeout(function() { window.location = '/GitHub/Proyecto-Final/indexAdmin.php' }, 10);</script>  
+                                    <script>window.setTimeout(function() { window.location = '/webapps/Proyecto-Final/indexAdmin.php' }, 10);</script>  
                                 <?php
 
                                 }
